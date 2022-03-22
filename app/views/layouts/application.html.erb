@@ -22,16 +22,9 @@
     <% if user_signed_in? %>
     <h6> Welcome to Project Management Tool  <%= current_user.email %> </h6>
    
-    <%# <%= link_to :Home,home_path %> 
-    <%# <%= link_to :editProfile, edit_user_registration_path %> 
-    <%# <%= link_to :logout, destroy_user_session_path, :method => :delete  %> 
     
-    <%# <% if current_user.has_role? :admin %> 
-    <%# <%= link_to :Dashboard,dashboard_path %> 
-    <%# <% end %> 
-    <%# <%= link_to :login, new_user_session_path, :method => :get  %> 
-    <%# <%= link_to :signup, new_user_registration_path, :method => :get  %> 
-    <%end%>
+    <% end %> 
+    
     <%= yield %>
     
   </body>
