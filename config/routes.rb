@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   root 'home#homepage'
   get '/home', to: 'home#homepage'
   authenticate :user, ->(u) { u.has_role? :admin } do
-    # get 'guide/dashboard', :to => 'guides#dashboard'
-    get '/dashboard', to: 'home#dashboard'
+   get 'guide/dashboard', :to => 'guides#dashboard'
+   get '/dashboard', to: 'home#dashboard'
   end
   authenticate :user, ->(u) { u.has_role? :employee } do
     get '/dashboard', to: 'home#homepage'

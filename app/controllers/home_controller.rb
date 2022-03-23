@@ -5,5 +5,7 @@ class HomeController < ApplicationController
 
   def homepage; end
 
-  def dashboard; end
+  def dashboard
+    @users = User.order(created_at: :desc)
+  end
 end
