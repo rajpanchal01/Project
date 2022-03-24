@@ -123,6 +123,7 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.4.5)
+    nested_scaffold (1.1.0)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -256,6 +257,7 @@ DEPENDENCIES
   devise
   importmap-rails
   jbuilder
+  nested_scaffold
   pg
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.3)

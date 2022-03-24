@@ -1,0 +1,46 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @project_master %>
+
+<div>  
+  <%= link_to "Edit this project ", edit_project_master_path(@project_master) ,class: "btn btn-outline-warning btn-sm" %> |
+  <%= link_to "Back to project ", project_masters_path ,class: "btn btn-outline-success btn-sm" %> |
+  <%= button_to "Delete project ", @project_master, method: :delete ,class: "btn btn-outline-danger btn-sm" %>
+
+</div>
+<hr>
+<h3>New task</h3>
+
+<%= render 'tasks/form' %>
+<hr>
+<h3>Listing tasks</h3>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Project</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @project_master.tasks.each do |task| %>
+  <%if task.persisted?%>
+  <tr>
+    <td><%= task.name %></td>
+    <td><%= task.description %></td>
+    <td><%= task.status %></td>
+    <td><%= task.project_master %></td>
+    <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-outline-success" %></td>
+    <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn btn-outline-warning"%></td>
+    <td><%= button_to 'Destroy', [task.project_master, task], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %></td>
+  </tr>
+  <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%# <%= link_to 'New Task', new_project_master_task_path(:project_master_id) %> 
