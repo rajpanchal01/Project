@@ -4,8 +4,11 @@ class ProjectMastersController < ApplicationController
 
   # GET /project_masters or /project_masters.json
   def index
-    # @project_masters = ProjectMaster.all
-    @project_masters = current_user.project_masters
+    if current_user.has_role? :admin
+     @project_masters = ProjectMaster.all
+    else
+     @project_masters = current_user.project_masters
+    end
   end
 
   # GET /project_masters/1 or /project_masters/1.json
@@ -15,6 +18,7 @@ class ProjectMastersController < ApplicationController
 
   # GET /project_masters/new
   def new
+    @users = User.order(created_at: :desc)
     @project_master = ProjectMaster.new
   end
 
@@ -24,8 +28,8 @@ class ProjectMastersController < ApplicationController
 
   # POST /project_masters or /project_masters.json
   def create
-    # @project_master = ProjectMaster.new(project_master_params)
-    @project_master = current_user.project_masters.build(project_master_params)
+    @project_master = ProjectMaster.new(project_master_params)
+    # @project_master = current_user.project_masters.build(project_master_params)
 
     respond_to do |format|
       if @project_master.save
@@ -69,6 +73,6 @@ class ProjectMastersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_master_params
-      params.require(:project_master).permit(:name, :description)
+      params.require(:project_master).permit(:name, :description ,:user_id)
     end
 end

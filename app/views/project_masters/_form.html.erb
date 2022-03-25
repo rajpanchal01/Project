@@ -21,10 +21,13 @@
     <%= form.text_area :description %>
   </div>
 
-  <%# <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%# <%= form.text_field :user_id %> 
-  <%# </div> %> 
+  <div>
+    <%= form.label :Project_manager, style: "display: block" %>
+    <%# <%= form.select :user_id, options_for_select("1","2"),style: "display: block"  %> 
+    <%= form.select :user_id, @users.map { |t| [t.email, t.id]}, {}, class: "form-control" %>
+
+
+  </div> 
 
   <div>
     <%= form.submit "save"%>
