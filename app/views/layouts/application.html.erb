@@ -20,7 +20,7 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if user_signed_in? %>
-    <h6> Welcome to Project Management Tool  <%= current_user.email %> </h6>
+    <h5>Welcome to Project Management Tool  <span class="display-6 text-capitalize"><%= current_user.email.split(/@/)[0] %> </span>  </h5>
    
     
     <% end %> 

@@ -1,16 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Project </h1>
+<%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-primary" %>
+
   <div id="project_masters">
   <% @project_masters.each do |project_master| %>
     <%= render project_master %>
     <p>
-      <%= link_to "Show this project", project_master %>
-      <%= link_to "Add team",dashboard_path %>
+      <%= link_to "Show this project", project_master ,class: "btn btn-outline-danger" %>
+      <%= link_to "Add team",dashboard_path,class: "btn btn-outline-dark"  %>
     </p>
   <% end %>
 </div>
 
 
 
-<%= link_to "New project", new_project_master_path %>

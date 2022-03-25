@@ -10,8 +10,9 @@
   </p>
 
   <p>
-    <strong>User:</strong>
-    <%= project_master.user_id %>
+    <strong>Project Manager:</strong>
+    <%# <%= project_master.user_id %> 
+    <%= User.find(project_master.user_id).email%>
   </p>
 
   <p>

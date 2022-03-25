@@ -2,7 +2,7 @@
     <% if user!=current_user %>
         <%= user.email %>
         <%= user.roles.pluck(:name) %>
-        <%= link_to "edit", edit_user_registration_path(user) %>
+        <%= link_to "edit", edit_user_registration_path(user) ,class: "btn btn-sm btn-outline-warning"  %>
     <br>
     <%end%>
 <%end%>

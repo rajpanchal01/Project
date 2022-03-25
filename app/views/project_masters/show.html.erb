@@ -32,7 +32,9 @@
     <td><%= task.name %></td>
     <td><%= task.description %></td>
     <td><%= task.status %></td>
-    <td><%= task.project_master %></td>
+    <%# <td><%= task.project_master %>
+    <td><%= ProjectMaster.find(task.project_master_id).name %></td> 
+
     <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-outline-success" %></td>
     <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn btn-outline-warning"%></td>
     <td><%= button_to 'Destroy', [task.project_master, task], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %></td>
