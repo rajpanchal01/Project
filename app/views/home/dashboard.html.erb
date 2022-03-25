@@ -1,6 +1,8 @@
 <% @users.each do |user| %>
-    <%= user.email %>
-    <%= user.roles.pluck(:name) %>
-    <%= link_to "edit", edit_user_registration_path(user) %>
+    <% if user!=current_user %>
+        <%= user.email %>
+        <%= user.roles.pluck(:name) %>
+        <%= link_to "edit", edit_user_registration_path(user) %>
     <br>
+    <%end%>
 <%end%>
