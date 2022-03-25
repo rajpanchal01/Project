@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :project_masters  do
     resources :tasks
   end
+
+  
   devise_for :users
   root 'home#homepage'
   get '/home', to: 'home#homepage'
