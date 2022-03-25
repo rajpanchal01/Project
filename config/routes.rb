@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'new_projects/index'
+  
   devise_for :users
   root "home#homepage"
   get "/home" ,to: "home#homepage"
