@@ -68,7 +68,7 @@ class ProjectMastersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project_master
-      @project_master = current_user.project_masters.find(params[:id])
+      @project_master = ProjectMaster.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
