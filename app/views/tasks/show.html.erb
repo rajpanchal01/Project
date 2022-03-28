@@ -16,8 +16,9 @@
 </p>
 
 <p>
-  <b>Project :</b>
-  <%= @task.project_master %>
+  <b>Project:</b>
+  <%# <%= @task.project_master %> 
+  <%=  ProjectMaster.find(@task.project_master.id).name %>
 </p>
 
 

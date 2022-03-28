@@ -8,6 +8,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   after_create :assign_default_role
   has_many :project_masters
+  has_many :tasks
+  validate :must_have_a_role, on: :update
+
+  private
+  def must_have_a_role
+    unless roles.any?
+      errors.add(:roles, "must have at least 1 role")
+    end
+  end
+  
   def assign_default_role
     add_role(:employee) if roles.blank?
   end

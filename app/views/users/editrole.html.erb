@@ -1,0 +1,9 @@
+<h1>Edit role </h1>
+<h6 class="text-uppercase"><%= @user.email.split(/@/)[0] %></h6>
+<%= form_with(model: @user) do |form| %>
+  <%= form.collection_check_boxes :role_ids, Role.all, :id, :name %>
+  <%= @user.errors[:roles] %>
+  <%# <%= form.submit "Update role",class: "btn btn-sm btn-outline-danger"  %> 
+  <%= form.button :submit,class: "btn btn-sm btn-outline-danger" %>
+<% end %>
+  <%= link_to "Back to Dashboard ", dashboard_path ,class: "btn btn-outline-success btn-sm" %> 
