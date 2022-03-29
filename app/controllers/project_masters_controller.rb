@@ -24,6 +24,7 @@ class ProjectMastersController < ApplicationController
 
   # GET /project_masters/1/edit
   def edit
+    @users = User.order(created_at: :desc)
   end
 
   # POST /project_masters or /project_masters.json

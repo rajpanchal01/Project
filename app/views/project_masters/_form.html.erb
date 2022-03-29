@@ -22,10 +22,11 @@
   </div>
 
   <div>
-    <%= form.label :Project_manager, style: "display: block" %>
     <%# <%= form.select :user_id, options_for_select("1","2"),style: "display: block"  %> 
-    <%= form.select :user_id, @users.map { |t| [t.email, t.id]}, {}, class: "form-control" %>
-
+    <% if current_user.has_role? :admin %>
+    <%= form.label :Project_manager, style: "display: block" %>
+    <%= form.select :user_id, @users.select{|a| a.has_role? :manager}.map { |t| [t.email, t.id]}, {}, class: "form-control" %>
+    <% end %>
 
   </div> 
 
