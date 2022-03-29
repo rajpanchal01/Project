@@ -20,14 +20,13 @@
   <body>
     <%= render 'shared/navbar' %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <% if user_signed_in? %>
     <h5>Welcome to Project Management Tool  <span class="display-6 text-capitalize"><%= current_user.email.split(/@/)[0] %> </span>  </h5>
    
     
     <% end %> 
-    
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
     
   </body>

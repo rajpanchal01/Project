@@ -74,4 +74,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+#figaro secure sensitive information
+gem "figaro"
 end
