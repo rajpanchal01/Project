@@ -16,6 +16,16 @@
   </p>
 
   <p>
+    <strong>Project Type:</strong>
+    <%# <%= project_master.user_id %> 
+    <% if project_master.ptype %>
+      Paid
+    <% else %>
+      Free
+    <% end %>
+  </p>
+
+  <p>
     <strong>Created at:</strong>
     <%= project_master.created_at %>
   </p>
