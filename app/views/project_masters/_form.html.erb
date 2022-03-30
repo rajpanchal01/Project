@@ -26,6 +26,9 @@
     <% if current_user.has_role? :admin %>
     <%= form.label :Project_manager, style: "display: block" %>
     <%= form.select :user_id, @users.select{|a| a.has_role? :manager}.map { |t| [t.email, t.id]}, {}, class: "form-control" %>
+
+    <%= form.label :ptype, "Project Type", style: "display: block" %>
+    <%= form.select :ptype, [["Paid",true],["Free",false]] %>
     <% end %>
 
   </div> 
