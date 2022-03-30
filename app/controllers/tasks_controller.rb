@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_project_master
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  @users=User.all
 
   # GET project_masters/1/tasks
   def index
@@ -34,12 +35,16 @@ class TasksController < ApplicationController
 
   # PUT project_masters/1/tasks/1
   def update
+    if current_user.id == @task.project_master.user_id
     if @task.update(task_params)
       redirect_to(@task.project_master)
       # redirect_to(@task.project_master, notice: 'Task was successfully updated.')
     else
       render action: 'edit'
     end
+  else @task.update(task_params)
+    redirect_to root_path
+  end
   end
 
   # DELETE project_masters/1/tasks/1
@@ -52,7 +57,7 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project_master
-      @project_master = current_user.project_masters.find(params[:project_master_id])
+      @project_master = ProjectMaster.find(params[:project_master_id])
     end
 
     def set_task
@@ -61,6 +66,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:name, :description, :status, :project_master_id)
+      params.require(:task).permit(:name, :description, :status, :project_master_id, :user_id)
     end
 end

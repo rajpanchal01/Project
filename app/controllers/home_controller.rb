@@ -3,7 +3,9 @@
 class HomeController < ApplicationController 
   before_action :authenticate_user!
 
-  def homepage; end
+  def homepage
+      @users = User.all
+  end
 
   def dashboard
     @users = User.order(created_at: :desc)

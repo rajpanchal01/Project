@@ -21,6 +21,11 @@
   <%=  ProjectMaster.find(@task.project_master.id).name %>
 </p>
 
+<p>
+  <b>Assigned to:</b>
+  <%# <%= @task.user_id %> 
+  <%=  User.find(@task.user_id).email %>
+</p>
 
 <%= link_to 'Edit', edit_project_master_task_path(@task.project_master, @task) %> |
 <%= link_to 'Back', project_master_path(@task.project_master) %>
