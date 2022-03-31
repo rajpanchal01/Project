@@ -1,0 +1,41 @@
+<%=form_with model: @user do |form| %>
+
+<div class="field">
+    <%= form.label :username %><br />
+    <%= form.text_field :username  ,class: 'form-control'%>
+  </div>
+
+ <div class="field">
+    <%= form.label :email %><br />
+    <%= form.email_field :email  ,class: 'form-control'%>
+  </div>
+    <% if action_name == 'new' %>
+    <div class="field">
+        <%= form.label :password %><br />
+        <%= form.password_field :password  ,class: 'form-control'%>
+    </div>   
+     <div class="field">
+        <%= form.label :Confirmpassword %><br />
+        <%= form.password_field :password_confirmation  ,class: 'form-control'%>
+    </div>   
+  
+   <% end %>
+  
+ 
+    <div class="field">
+        <%= form.label :Role %><br />
+        <%= form.collection_check_boxes :role_ids, Role.all, :id, :name  ,class: 'form-control'%>
+         <% if action_name == 'update' %>
+        <%= @user.errors[:roles] %> 
+        <% end  %> 
+   </div>
+
+   <% if action_name == 'new'%>
+        <%= form.submit "Add User",class: "btn btn-sm btn-outline-danger"  %> 
+
+    <% else %>
+        <%= form.submit "Update User",class: "btn btn-sm btn-outline-danger"  %> 
+
+   <% end %>
+
+<% end %>
