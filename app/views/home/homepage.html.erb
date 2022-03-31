@@ -1,23 +1,33 @@
-<table border='1' class ="table">
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Status</th>
-    <th>Project</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-<% Task.all.each do |task| %>
-    <% if task.user_id == current_user.id %>
+  
+<% if !current_user.has_role? :admin %>
+<h1>Task </h1>
+
+    <% if !@task.count == 0 %>
+
+  <table border='1' class ="table">
     <tr>
-    <td><%= task.name %></td>
-    <td><%= task.description %></td>
-    <td><%= task.status %></td>
-    <td><%= task.project_master.name%></td>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Project</th>
+      <th>status</th>
     
-    <td><%= link_to 'Edit Status', edit_project_master_task_path(task.project_master, task) %></td>
-    
-  </tr> 
-    <%end%>
-<%end%>
+    </tr>
+  <% @task.each do |task| %>
+      <%# <% if task.user_id == current_user.id %> 
+      <tr>
+      <td><%= task.name %></td>
+      <td><%= task.description %></td>
+      <td><%= task.status %></td>
+      <td><%= task.project_master.name%></td>
+      
+      <td><%= link_to 'Edit Status', edit_project_master_task_path(task.project_master, task),class:"btn btn-outline-primary" %></td>
+      
+    </tr> 
+      
+   <%end%>
+   <%else%> 
+      <h2> No task assigned </h2>
+  <%end%>
+  <%end%>
+  
