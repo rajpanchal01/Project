@@ -5,7 +5,10 @@ class HomeController < ApplicationController
 
   def homepage
       @users = User.all
-  end
+      # @task = Task.all.find_by_user_id(current_user.id)
+      @task = Task.where(user_id: current_user.id)
+
+    end
 
   def dashboard
     @users = User.order(created_at: :desc)

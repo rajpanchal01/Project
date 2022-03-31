@@ -13,12 +13,12 @@
 
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name,class: "form-control" %>
   </div>
 
   <div>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description ,class: "form-control"%>
   </div>
 
   <div>
@@ -26,14 +26,17 @@
     <% if current_user.has_role? :admin %>
     <%= form.label :Project_manager, style: "display: block" %>
     <%= form.select :user_id, @users.select{|a| a.has_role? :manager}.map { |t| [t.email, t.id]}, {}, class: "form-control" %>
-
+  </div> 
+  <div>
     <%= form.label :ptype, "Project Type", style: "display: block" %>
-    <%= form.select :ptype, [["Paid",true],["Free",false]] %>
+        <%= form.select :ptype,  [["Paid",true],["Free",false]], {}, class: "form-control" %>
+
+    <%# <%= form.select :ptype, [["Paid",true],["Free",false]] , class: "form-control" %> 
     <% end %>
 
   </div> 
 
   <div>
-    <%= form.submit "save"%>
+    <%= form.submit "save",class: "btn btn-sm btn-outline-primary"%>
   </div>
 <% end %>

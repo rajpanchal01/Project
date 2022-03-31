@@ -16,7 +16,6 @@
        <td> <%= user.roles.pluck(:name) %></td>
        <td> <%= link_to "Edit", edit_user_path(user) ,class: "btn btn-sm btn-outline-warning"  %></td>
        <td> <%= link_to "Delete", edit_user_path(user) ,class: "btn btn-sm btn-outline-danger"  %></td>
-        <%# <%= link_to 'Edit roles', edit_user_path(user) %> 
     </tr>
     <%end%>
 <%end%>
