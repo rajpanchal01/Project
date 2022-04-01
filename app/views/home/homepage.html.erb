@@ -2,7 +2,7 @@
 <% if !current_user.has_role? :admin %>
 <h1>Task </h1>
 
-    <% if !@task.count == 0 %>
+    <% if @task.count > 0 %>
 
   <table border='1' class ="table">
     <tr>

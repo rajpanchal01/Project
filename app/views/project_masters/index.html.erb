@@ -4,20 +4,19 @@
 <% if current_user.has_role? :admin %>
 <%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-primary" %>
 <% end %>
+
   <div id="project_masters">
   <% if @project_masters.count > 0 %>
+  <div class="row">
 
   <% @project_masters.each do |project_master| %>
     <%= render project_master %>
-    <p>
-      <%= link_to "Show this project", project_master ,class: "btn btn-outline-danger" %>
-      <%# <%= link_to "Add team",dashboard_path,class: "btn btn-outline-dark"  %> 
-    </p>
+   
   <% end %> 
+  </div>
   <%else%>
   <h2> No Project assigned </h2>
   <% end %> 
 </div>
-
 
 

@@ -1,33 +1,26 @@
+<div class="col-lg-4" style="height: 25%">
 <div id="<%= dom_id project_master %>">
-  <p>
-    <strong>Name:</strong>
-    <%= project_master.name %>
-  </p>
+<% textcolor = ['text-info','text-success','text-danger','text-secondary','text-warning','text-primary']%>
+  <div class="card shadow p-3 mb-5 bg-white rounded ">
+    <div class="card-body">
+      <h5 class="card-title text-bold text-uppercase <%=textcolor.sample%>" ><%= project_master.name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"> <span>Manager:</span> <%= User.find(project_master.user_id).username%></h6>
+      <p class="card-text"> <%= project_master.description %></p>
+    
+      <% if project_master.ptype %>
+      <p class="card-text"><small class="text-success"> Paid </small></p>
+      <% else %>
+      <p class="card-text"><small class="text-danger"> Free </small></p>
+      <% end %>
 
-  <p>
-    <strong>Description:</strong>
-    <%= project_master.description %>
-  </p>
+      <p class="card-text"><small class="text-muted"><%= project_master.created_at %></small></p>
 
-  <p>
-    <strong>Project Manager:</strong>
-    <%# <%= project_master.user_id %> 
-    <%= User.find(project_master.user_id).email%>
-  </p>
-
-  <p>
-    <strong>Project Type:</strong>
-    <%# <%= project_master.user_id %> 
-    <% if project_master.ptype %>
-      Paid
-    <% else %>
-      Free
-    <% end %>
-  </p>
-
-  <p>
-    <strong>Created at:</strong>
-    <%= project_master.created_at %>
-  </p>
-
+   
+     <p>
+      <%= link_to "View project", project_master ,class: "btn btn-sm btn-outline-dark" %>
+      <%# <%= link_to "Add team",dashboard_path,class: "btn btn-outline-dark"  %> 
+      </p>
+     </div>
+  </div>
+</div>
 </div>
