@@ -19,17 +19,15 @@
 
   <body>
     <%= render 'shared/navbar' %>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if user_signed_in? %>
-    <h5>Welcome to Project Management Tool   </h5>
-       <span class="h4 text-success"><%= current_user.username %> </span>
-
-    
-    <% end %> 
-    
-    <%= yield %>
-    
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <% if user_signed_in? %>
+        <h5>Welcome to Project Management Tool   </h5>
+        <span class="h4 text-success"><%= current_user.username %> </span>
+      <% end %> 
+      
+      <%= yield %>
+    </div>
   </body>
 </html>
