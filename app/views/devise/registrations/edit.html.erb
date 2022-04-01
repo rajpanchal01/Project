@@ -1,6 +1,6 @@
-<div class="card">
-  <div class="card-header">
-  <h4>Edit Profile</h4>
+<div class="card  shadow p-3 mb-5 bg-white rounded" >
+  <div class="text-uppercase text-bold  text-center bg-white">
+  <h4 style="color: #00758F">Edit Profile</h4>
   </div>
   <div class="card-body">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -9,14 +9,14 @@
    <div class="field  form-group">
       <%f.label :username %><br />
       <%= f.text_field :username, 
-      class:"form-control",placeholder:"Username",
+      class:"form-control border-0 border-bottom border-info",placeholder:"Username",
       autofocus: true, autocomplete: "username" %>
     </div>
 
     <div class="field form-group">
       <%f.label :email %><br />
       <%= f.email_field :email, 
-      class:"form-control",placeholder:"Email",
+       class:"form-control border-0 border-bottom border-info",placeholder:"Email",
       autofocus: true, autocomplete: "email" %>
     </div>
   
@@ -27,7 +27,7 @@
     <div class="field form-group">
       <%f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
       <%= f.password_field :password,
-      class:"form-control",placeholder:"password",
+       class:"form-control border-0 border-bottom border-info",placeholder:"password",
       autocomplete: "new-password" %>
       <% if @minimum_password_length %>
         
@@ -38,19 +38,19 @@
     <div class="field form-group">
       <%f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation,
-      class:"form-control",placeholder:"new-password",
+       class:"form-control border-0 border-bottom border-info",placeholder:"new-password",
       autocomplete: "new-password" %>
     </div>
   
     <div class="field form-group">
       <%f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
       <%= f.password_field :current_password,
-      class:"form-control",placeholder:"current-password",
+      class:"form-control border-0 border-bottom border-info",placeholder:"current-password",
       autocomplete: "current-password" %>
     </div>
   
     <div class="actions">
-      <%= f.submit "Update", class:'btn btn-secondary' %>
+      <%= f.submit "Update", class:'btn btn-outline-info' %>
     </div>
   <% end %>
 
@@ -63,7 +63,7 @@
 
 
 <br/><br/>
-
+<%# 
 <div class="card">
   <div class="card-header">
   <h4>Cancel my account</h4>
@@ -71,8 +71,8 @@
   <div class="card-body">
     <h5 class="card-title">Unhappy?</h5>
     <p class="card-text"><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:'btn btn-danger' %></p>
-   </div>
-</div>
+   <%# </div>
+</div> %> 
 
 
 
