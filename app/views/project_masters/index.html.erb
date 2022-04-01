@@ -2,8 +2,10 @@
 
 <h1>Project </h1>
 <% if current_user.has_role? :admin %>
-<%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-primary" %>
+<%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-info" %>
 <% end %>
+<br>
+<br>
 
   <div id="project_masters">
   <% if @project_masters.count > 0 %>
