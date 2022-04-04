@@ -1,0 +1,12 @@
+<h2>Add team members</h2>
+
+<h4>Project Name: </h4>
+<p><%= @project.name %></p>
+
+<h4>Project Type: </h4>
+<p><%= (@project.ptype)?("Paid"):("Free") %></p>
+<p>Note that paid projects can have more than 5 team members</p>
+
+<%= form_with model: @member, method: :post do |f| %>
+<%= f.select :member_id, User.where.not(id: Member.where(project_master_id: @project.id).select(:user_id)).pluck(:email) %>
+<% end %>
