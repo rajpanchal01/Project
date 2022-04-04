@@ -1,11 +1,10 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @project_master %>
+<%= render 'project_master_show' %>
 
 <div>  
+
   <%= link_to "Edit this project ", edit_project_master_path(@project_master) ,class: "btn btn-outline-warning btn-sm" %> |
-  <%= link_to "Back to project ", project_masters_path ,class: "btn btn-outline-success btn-sm" %> |
-  <%= button_to "Delete project ", @project_master, method: :delete ,class: "btn btn-outline-danger btn-sm" %>
+  <%= link_to "Back to project ", project_masters_path ,class: "btn btn-outline-success btn-sm" %> 
 
 </div>
 <hr>

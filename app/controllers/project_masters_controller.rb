@@ -46,6 +46,7 @@ class ProjectMastersController < ApplicationController
   # PATCH/PUT /project_masters/1 or /project_masters/1.json
   def update
     respond_to do |format|
+
       if @project_master.update(project_master_params)
         format.html { redirect_to project_master_url(@project_master), notice: "Project master was successfully updated." }
         format.json { render :show, status: :ok, location: @project_master }
@@ -74,6 +75,6 @@ class ProjectMastersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_master_params
-      params.require(:project_master).permit(:name, :description ,:user_id, :ptype)
+      params.require(:project_master).permit(:name, :description ,:user_id, :ptype ,:client_id,:client_requirements,:budget,:phase,:technology,:start_date,:end_date,:expected_duration)
     end
 end
