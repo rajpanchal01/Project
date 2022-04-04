@@ -1,12 +1,14 @@
-<p style="color: green"><%= notice %></p>
 
 <h1>Project </h1>
 <% if current_user.has_role? :admin %>
-<%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-primary" %>
+<%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-info" %>
 <% end %>
+<br>
+<br>
+
   <div id="project_masters">
   <% if @project_masters.count > 0 %>
-
+  <div class="row">
   <% @project_masters.each do |project_master| %>
     <%= render project_master %>
     <p>
@@ -15,10 +17,10 @@
       <%= link_to "Add team member", members_path(project_master.id) ,class: "btn btn-outline-info" %>
     </p>
   <% end %> 
+  </div>
   <%else%>
   <h2> No Project assigned </h2>
   <% end %> 
 </div>
-
 
 

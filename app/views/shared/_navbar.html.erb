@@ -1,45 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
-  <a class="navbar-brand" href="/"> PMT APP</a>
+<nav name="navbar"class="navbar navbar-expand-lg text-white " style="background-color: #00758F">
+  <a class="navbar-brand link-light" href="/"> PMT</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav p-2  ml-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-             <%= link_to :Home,home_path ,class: 'nav-link' %>
+             <%= link_to :HOME,home_path ,class: 'link-light nav-link' %>
           </li> 
           <% if current_user.has_role? :admin %>
 
           <li class="nav-item">
-             <%= link_to :Users,dashboard_path ,class: 'nav-link' %>
+             <%= link_to :USERS,dashboard_path ,class: 'link-light nav-link' %>
           </li> 
            <li class="nav-item">
-             <%= link_to :Projects,project_masters_path ,class: 'nav-link' %>
+             <%= link_to :PROJECTS,project_masters_path ,class: 'link-light nav-link' %>
           </li> 
           <% end %>
 
           <% if current_user.has_role? :manager %>
 
           <li class="nav-item">
-             <%= link_to :Projects,project_masters_path ,class: 'nav-link' %>
+             <%= link_to :PROJECTS,project_masters_path ,class: 'link-light nav-link' %>
           </li> 
           <% end %>
 
           <li class="nav-item">
-            <%= link_to :editProfile, edit_user_registration_path, class: 'nav-link' %>
+            <%= link_to :EDITPROFILE, edit_user_registration_path, class: 'link-light nav-link' %>
           </li>
             <li class="nav-item">
                 <%# <%= link_to 'Sign Out', users_sign_out_path, method: :get, class: 'nav-link' %> 
-                <%= link_to "Sign out", users_sign_out_path, class: 'nav-link'%>
+                <%= link_to "SIGN OUT", users_sign_out_path, class: 'link-light nav-link'%>
             </li>
         <% else %>
             <li class="nav-item">
-                <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+                <%= link_to 'SIGN IN', new_user_session_path, class: 'link-light nav-link' %>
             </li>
             <li class="nav-item">
-                <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>
+                <%= link_to 'REGISTER', new_user_registration_path, class: 'link-light nav-link' %>
             </li>
         <% end %>
     </ul>

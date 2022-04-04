@@ -10,32 +10,84 @@
       </ul>
     </div>
   <% end %>
+  <div class="row">
+    <div class="col">
+      <div>
+          <%= form.label :name,'Project Name', style: "display: block" %>
+          <%= form.text_field :name,class: "form-control border-warning" %>
+        </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name,class: "form-control" %>
+        <div>
+          <%= form.label :description, 'Project Description',style: "display: block" %>
+          <%= form.text_area :description ,class: "form-control border-warning"%>
+        </div>
+
+        <div>
+          <% if current_user.has_role? :admin %>
+          <%= form.label :Project_manager, style: "display: block" %>
+          <%= form.select :user_id, @users.select{|a| a.has_role? :manager}.map { |t| [t.email, t.id]}, {}, class: "form-control border-warning" %>
+        </div> 
+    </div>
+     <div class="col">
+        <div>
+            <%= form.label :Client,'Client Name', style: "display: block" %>
+          <%= form.select :client_id, @users.all.collect{|a| [a.email, a.id]}, {}, class: "form-control border-warning" %>
+          </div> 
+
+        <div>
+            <%= form.label :Client_Requirements, 'Client Requirements',style: "display: block" %>
+            <%= form.text_area :client_requirements ,class: "form-control border-warning"%>
+          </div>
+          
+        <div>
+            <%= form.label :Budget, style: "display: block" %>
+            <%= form.text_field :budget,class: "form-control border-warning" %>
+          </div>
+    </div>
   </div>
+ <div class="row">
+    <div class="col">
+        <%= form.label :ptype, "Project Type", style: "display: block" %>
+        <%= form.radio_button :ptype, 'Fixed'%>
+        <%= form.label :ptype, 'Fixed' %>
 
+        <%= form.radio_button :ptype, 'Hourly'%>
+        <%= form.label :ptype, 'Hourly' %>
+
+        <%= form.radio_button :ptype, 'Dedicated'%>
+        <%= form.label :ptype, 'Dedicated' %>
+
+        <% end %>
+    </div>
+    <div class="col">
+
+      <%= form.label :phase, "Project Phase", style: "display: block" %>
+      <%= form.select :phase,  options_for_select([ "Not Started", "Started","On Going","On Hold","Completed","Maintenance" ],project_master.phase), {}, class: "form-control border-warning" %> 
+    </div> 
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description ,class: "form-control"%>
+
   </div>
+ </div>
 
   <div>
-    <%# <%= form.select :user_id, options_for_select("1","2"),style: "display: block"  %> 
-    <% if current_user.has_role? :admin %>
-    <%= form.label :Project_manager, style: "display: block" %>
-    <%= form.select :user_id, @users.select{|a| a.has_role? :manager}.map { |t| [t.email, t.id]}, {}, class: "form-control" %>
-  </div> 
-  <div>
-    <%= form.label :ptype, "Project Type", style: "display: block" %>
-        <%= form.select :ptype,  [["Paid",true],["Free",false]], {}, class: "form-control" %>
-
-    <%# <%= form.select :ptype, [["Paid",true],["Free",false]] , class: "form-control" %> 
-    <% end %>
-
-  </div> 
-
+    <%= form.label :technology,'Technology', style: "display: block" %>
+    <%= form.select :technology,  options_for_select([ "ROR", "Node JS","React JS","Python","Laravel","Java" ]), {}, class: "form-control border-warning" %> 
+  </div>
+ 
+   <div class="row">
+      <div class="col">
+        <%= form.label :Start_date %>
+        <%= form.date_field :start_date,class: "form-control border-warning" %>
+      </div>
+      <div class="col">
+        <%= form.label :End_date %>
+        <%= form.date_field :end_date,class: "form-control border-warning" %>
+     </div>
+      <div class="col">
+       <%= form.label :Expected_duration  %>
+       <%= form.date_field :expected_duration,class: "form-control border-warning" %>
+      </div>  
+   </div>
   <div>
     <%= form.submit "save",class: "btn btn-sm btn-outline-primary"%>
   </div>
