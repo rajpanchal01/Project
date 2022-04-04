@@ -1,24 +1,39 @@
 <div class="col-lg-4" style="height: 25%">
 <div id="<%= dom_id project_master %>">
 <% textcolor = ['text-info','text-success','text-danger','text-secondary','text-warning','text-primary']%>
+ <% 
+      bgcolor = 'bg-info'
+      case project_master.phase
+      when 'Not Started'
+        bgcolor = 'bg-danger'
+        when 'Started'
+        bgcolor = 'bg-success'
+      when 'On Going'
+        bgcolor = 'bg-info'
+      when 'On Hold'
+        bgcolor = 'bg-warning'
+      when 'Completed'
+        bgcolor = 'bg-dark'
+      when 'Maintenance'
+        bgcolor = 'bg-primary'
+      end
+
+      %>
   <div class="card shadow p-3 mb-5 bg-white rounded ">
     <div class="card-body">
+
       <h5 class="card-title text-bold text-uppercase <%=textcolor.sample%>" ><%= project_master.name %></h5>
+
       <h6 class="card-subtitle mb-2 text-muted"> <span>Manager:</span> <%= User.find(project_master.user_id).username%></h6>
+
       <p class="card-text"> <%= project_master.description %></p>
-    
-      <% if project_master.ptype %>
-      <p class="card-text"><small class="text-success"> Paid </small></p>
-      <% else %>
-      <p class="card-text"><small class="text-danger"> Free </small></p>
-      <% end %>
+  
+      <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= project_master.phase %> </small></p>
 
       <p class="card-text"><small class="text-muted"><%= project_master.created_at %></small></p>
 
-   
      <p>
       <%= link_to "View project", project_master ,class: "btn btn-sm btn-outline-dark" %>
-      <%# <%= link_to "Add team",dashboard_path,class: "btn btn-outline-dark"  %> 
       </p>
      </div>
   </div>

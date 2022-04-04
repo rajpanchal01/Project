@@ -1,4 +1,3 @@
-<p style="color: green"><%= notice %></p>
 
 <h1>Project </h1>
 <% if current_user.has_role? :admin %>
@@ -10,7 +9,6 @@
   <div id="project_masters">
   <% if @project_masters.count > 0 %>
   <div class="row">
-
   <% @project_masters.each do |project_master| %>
     <%= render project_master %>
    
