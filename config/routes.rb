@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   authenticate :user, ->(u) { u.has_role? :admin } do
   resources :users
+  resources :clients
    get '/project_masters', :to => 'project_masters#index'
    get '/dashboard', to: 'home#dashboard'
   end

@@ -1,5 +1,5 @@
   
-<% if !current_user.has_role? :admin %>
+<% if !current_user.has_role? :admin  %>
 <h1>Task </h1>
 
     <% if @task.count > 0 %>
@@ -51,5 +51,7 @@
    <%else%> 
       <h2> No task assigned </h2>
   <%end%>
+  <%else%>
+  <%# admin dashboard %>
+   <%= render 'home/dashboard' %>
   <%end%>
-  

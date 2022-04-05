@@ -30,7 +30,7 @@
   
       <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= project_master.phase %> </small></p>
 
-      <p class="card-text"><small class="text-muted"><%= project_master.created_at %></small></p>
+      <p class="card-text"><small class="text-muted"><%= project_master.created_at.to_date %></small></p>
 
      <p>
       <%= link_to "View project", project_master ,class: "btn btn-sm btn-outline-dark" %>
