@@ -21,6 +21,7 @@
     <th>Status</th>
     <th>Project</th>
     <th>Assignedto</th>
+    <th>Due_date</th>
     <th></th>
     <th></th>
     <th></th>
@@ -35,6 +36,7 @@
     <%# <td><%= task.project_master %>
     <td><%= ProjectMaster.find(task.project_master_id).name %></td> 
     <td><%= User.find(task.user_id).email %></td> 
+    <td><%= task.due_date %></td>
 
     <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-outline-success" %></td>
     <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn btn-outline-warning"%></td>
