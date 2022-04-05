@@ -5,7 +5,7 @@ class ProjectMastersController < ApplicationController
   # GET /project_masters or /project_masters.json
   def index
     if current_user.has_role? :admin
-     @project_masters = ProjectMaster.all
+     @project_masters = ProjectMaster.with_deleted
     else
      @project_masters = current_user.project_masters
     end
@@ -18,7 +18,7 @@ class ProjectMastersController < ApplicationController
 
   # GET /project_masters/new
   def new
-    @users = User.order(created_at: :desc)
+    @users = User.with_deleted.order(created_at: :desc)
     @project_master = ProjectMaster.new
     @clients = Client.order(created_at: :desc)
   end

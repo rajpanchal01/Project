@@ -45,7 +45,7 @@
               />
             </div>
             <h4 class="mb-2"><%= user.username %></h4>
-             <a class="text-decoration-none" href="mailto:<%= user.email %>"><%= user.email %></a>
+             <a class="text-decoration-none small" href="mailto:<%= user.email %>"><%= user.email %></a>
             <p class="text-muted mb-3"><% if user.has_role? :manager %>
             <small class="badge bg-warning text-dark">manager</small>
             <% end%>
@@ -65,8 +65,13 @@
                 <p class="text-muted small mb-0">Project completed</p>
               </div>
             </div>
-            <%= button_to "Delete", edit_user_path(user) ,class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "Edit", edit_user_path(user) ,class: "float-right btn btn-sm btn-outline-info"  %>
+            <% if user.deleted_at.nil? %>
 
+            <%=button_to "Delete",{ controller: :users, action: :destroy, id: user.id },method: :delete, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "Edit", edit_user_path(user) ,class: "float-right btn btn-sm btn-outline-info"  %>
+            <%else%>
+            <%=button_to "Restore",{ controller: :users, action: :update, id: user.id },method: :patch, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-danger"  %> <%= link_to "Edit", edit_user_path(user) ,class: "disabled float-right btn btn-sm btn-secondary"  %>
+
+             <%end%>
           </div>
         </div>
       </div>
@@ -120,7 +125,7 @@
               />
             </div>
             <h4 class="mb-2"><%= client.name %></h4>
-           <a class="text-decoration-none" href="mailto:<%= client.email %>"><%= client.email %></a></p>
+           <a class="text-decoration-none small" href="mailto:<%= client.email %>"><%= client.email %></a></p>
             <div class="d-flex justify-content-between text-center mt-2 mb-2">
               <div>
                 <p class="mb-2 h6"><%=@project.where(client_id: client.id).count%></p>
@@ -135,8 +140,13 @@
                 <p class="text-muted small mb-0">Project completed</p>
               </div>
             </div>
-           <%= button_to "Delete", edit_client_path(client) ,class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "Edit", edit_client_path(client) ,class: "float-right btn btn-sm btn-outline-info"  %>
+            <% if client.deleted_at.nil? %>
 
+           <%=button_to "Delete",{ controller: :clients, action: :destroy, id: client.id },method: :delete, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "Edit", edit_client_path(client) ,class: "float-right btn btn-sm btn-outline-info"  %>
+            <%else%>
+            <%=button_to "Restore",{ controller: :clients, action: :update, id: client.id },method: :patch, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-danger"  %> <%= link_to "Edit", edit_user_path(client) ,class: "disabled float-right btn btn-sm btn-secondary"  %>
+
+             <%end%>
           </div>
         </div>
       </div>

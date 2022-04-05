@@ -51,6 +51,7 @@
   </div>  
 <% if current_user.id == @task.project_master.user_id or current_user.has_role?:admin %>
   <div class="field">
+
     <%= f.label :Assigned_to%><br/>
     <% ids = [Member.where(project_master_id: @task.project_master.id).select(:user_id).pluck(:user_id),@task.project_master.user_id].flatten %>
     <%= f.select :user_id, User.where(id: ids).map{ |t| [t.email, t.id]}, {}, class: "form-control" %>

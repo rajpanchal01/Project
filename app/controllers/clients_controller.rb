@@ -17,9 +17,25 @@ class ClientsController < ApplicationController
     end
 
     def update
-        @client = Client.find(params[:id])
+        @client = Client.with_deleted.find(params[:id])
+
+        if !@client.deleted_at.nil?
+            @client.restore
+            redirect_to home_path, notice: "Client was successfully restored."
+        end
+
         if @client.update(client_params)
           redirect_to home_path, notice: "Client was successfully updated."
+        else
+          render :edit, status: :unprocessable_entity
+        end
+    end
+    
+    def destroy
+
+        @client = Client.find(params[:id])
+        if @client.update(deleted_at: Time.current)
+          redirect_to home_path, notice: "Client was successfully deleted."
         else
           render :edit, status: :unprocessable_entity
         end

@@ -37,13 +37,13 @@
     <td><%= task.description %></td>
     <td><%= task.status %></td>
     <%# <td><%= task.project_master %>
-    <td><%= ProjectMaster.find(task.project_master_id).name %></td> 
-    <td><%= User.find(task.user_id).email %></td> 
+    <td><%= ProjectMaster.with_deleted.find(task.project_master_id).name %></td> 
+    <td><%= User.with_deleted.find(task.user_id).email %></td> 
     <td><%= task.due_date %></td>
 
-    <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-outline-success" %></td>
-    <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn btn-outline-warning"%></td>
-    <td><%= button_to 'Destroy', [task.project_master, task], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %></td>
+    <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-sm btn-outline-success" %></td>
+    <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn  btn-sm btn-outline-warning"%></td>
+    <td><%= button_to 'Destroy', [task.project_master, task], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-sm btn-outline-danger" %></td>
   </tr>
   <% end %>
 <% end %>
