@@ -11,6 +11,8 @@ gem 'nested_scaffold'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+gem "paranoia"
+
 
 # Use postgres as the database for Active Record
 gem "pg"

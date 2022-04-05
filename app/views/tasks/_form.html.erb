@@ -36,7 +36,7 @@
   </div>  
 <% if current_user.id == @task.project_master.user_id or current_user.has_role?:admin %>
   <div class="field">
-    <%= f.label :user_id%><br />
+    <%= f.label :Assign_to%><br />
     <%= f.select :user_id, User.all.select{|a| !a.has_role? :admin }.map{ |t| [t.email, t.id]}, {}, class: "form-control" %>
   </div>
 <% end %>

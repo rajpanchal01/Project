@@ -25,13 +25,13 @@
         <div>
           <% if current_user.has_role? :admin %>
           <%= form.label :Project_manager, style: "display: block" %>
-          <%= form.select :user_id, @users.select{|a| a.has_role? :manager}.map { |t| [t.email, t.id]}, {}, class: "form-control border-warning" %>
+          <%= form.select :user_id, @users.without_deleted.select{|a| a.has_role? :manager}.map { |t| [t.email, t.id]}, {}, class: "form-control border-warning" %>
         </div> 
     </div>
      <div class="col">
         <div>
             <%= form.label :Client,'Client Name', style: "display: block" %>
-          <%= form.select :client_id, Client.all.map{|t| [t.name, t.id]}, {}, class: "form-control border-warning" %>
+          <%= form.select :client_id, Client.without_deleted.map{|t| [t.name, t.id]}, {}, class: "form-control border-warning" %>
           </div> 
 
         <div>
