@@ -6,7 +6,7 @@ class UsersController < ApplicationController
       def update
         @user = User.find(params[:id])
         if @user.update(user_params)
-          redirect_to dashboard_path, notice: "User was successfully updated."
+          redirect_to home_path, notice: "User was successfully updated."
         else
           render :editrole, status: :unprocessable_entity
         end

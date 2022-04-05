@@ -31,7 +31,7 @@
      <div class="col">
         <div>
             <%= form.label :Client,'Client Name', style: "display: block" %>
-          <%= form.select :client_id, @users.all.collect{|a| [a.email, a.id]}, {}, class: "form-control border-warning" %>
+          <%= form.select :client_id, Client.all.map{|t| [t.name, t.id]}, {}, class: "form-control border-warning" %>
           </div> 
 
         <div>

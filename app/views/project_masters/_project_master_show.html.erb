@@ -33,17 +33,17 @@
           <h6 class="card-text"> <b> Project Manager:</b> <%= User.find(@project_master.user_id).username%></h6>
           <p class="card-text"><b>Project Description: </b><%= @project_master.description %></p>
           <p class="card-text"><b>Project Type:</b> <%= @project_master.ptype %></p>
-          <p class="card-text"><b>Start date: </b><%= @project_master.start_date.to_date %></p>     
-          <p class="card-text"> <b> End date:</b>  <%= @project_master.end_date.to_date %></p>
+          <p class="card-text"><b>Start date: </b><% if !@project_master.start_date  == nil %> <%=@project_master.start_date.to_date %><%end%></p>     
+          <p class="card-text"><b>End date: </b><% if !@project_master.end_date  == nil %> <%=@project_master.start_date.to_date %><%end%></p>     
           <p class="card-text"><b>Technology:</b> <%= @project_master.technology %></p>
           <p class="card-text"> <b> Status:</b><small class="badge <%=bgcolor%> text-white"> <%= @project_master.phase %> </small> </p>
 
         </div>
         <div class="col">
-          <p class="card-text"><b>Client Name:</b> <%= @project_master.client_id %></p>
+          <p class="card-text"><b>Client Name:</b> <%= Client.find(@project_master.client_id).name %></p>
           <p class="card-text"><b>Client Requirements:</b> <%= @project_master.client_requirements %></p>
           <p class="card-text"><b>Budget:</b> <%= @project_master.budget %></p>
-          <p class="card-text"><b>Expected Duration:</b> <%= @project_master.expected_duration.to_date %> (<%= ((@project_master.expected_duration.to_time  - @project_master.created_at.to_time )/1.month.second).to_i%> months)</p>
+          <p class="card-text"><b>Expected Duration:</b> <%  if !@project_master.expected_duration == nil %> <%=@project_master.expected_duration.to_date %> (<%= ((@project_master.expected_duration.to_time  - @project_master.created_at.to_time )/1.month.second).to_i%> months) <%end%></p>
 
         </div>
       </div>
