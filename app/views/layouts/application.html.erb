@@ -25,11 +25,6 @@
     <div class="container">
       <p style="color: green"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <% if user_signed_in? %>
-        <h5>Welcome to Project Management Tool   </h5>
-        <span class="h4 text-success"><%= current_user.username %> </span>
-      <% end %> 
-      
       <%= yield %>
     </div>
   </body>
