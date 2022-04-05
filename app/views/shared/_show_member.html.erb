@@ -1,0 +1,21 @@
+<% allmember = Member.where(project_master_id: @project.id)%>
+<% if allmember.count > 0 %>
+    <p class="pt-2">Member details:</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Email</td>
+                <td></td>
+            </tr>
+        </thead>
+        <% allmember.each do |ele| %>
+            <tr>
+            <% user= (User.where(id: ele.user_id)) %>
+            <td><%= user.last.username %></td>
+            <td><%= user.last.email %></td>
+            <td><%= link_to "Remove", destroy_path(ele.id), class: "btn btn-sm btn-secondary"%></td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>

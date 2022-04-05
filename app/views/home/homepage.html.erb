@@ -1,4 +1,8 @@
-  
+<% if user_signed_in? %>
+  <h5>Welcome to Project Management Tool   </h5>
+  <span class="h4 text-success"><%= current_user.username %> </span>
+<% end %>
+
 <% if !current_user.has_role? :admin %>
 <h1>Task </h1>
 

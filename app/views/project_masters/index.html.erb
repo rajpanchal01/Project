@@ -11,11 +11,6 @@
   <div class="row">
   <% @project_masters.each do |project_master| %>
     <%= render project_master %>
-    <p>
-      <%= link_to "Show this project", project_master ,class: "btn btn-outline-info" %>
-      <%# <%= link_to "Add team",dashboard_path,class: "btn btn-outline-dark"  %> 
-      <%= link_to "Add team member", members_path(project_master.id) ,class: "btn btn-outline-info" %>
-    </p>
   <% end %> 
   </div>
   <%else%>
