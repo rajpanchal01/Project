@@ -10,7 +10,7 @@ class HomeController < ApplicationController
 
     end
 
-  def dashboard
-    @users = User.order(created_at: :desc)
-  end
+  # def dashboard
+  #   @users = User.order(created_at: :desc)
+  # end
 end

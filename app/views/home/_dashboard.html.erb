@@ -15,7 +15,7 @@
        <td> <%= user.email %> </td>
        <td> <%= user.roles.pluck(:name) %></td>
        <td> <%= link_to "Edit", edit_user_path(user) ,class: "btn btn-sm btn-outline-warning"  %></td>
-       <td> <%= link_to "Delete", edit_user_path(user) ,class: "btn btn-sm btn-outline-danger"  %></td>
+       <td> <%= button_to "Delete", edit_user_path(user) ,class: "btn btn-sm btn-outline-danger"  %></td>
     </tr>
     <%end%>
 <%end%>
