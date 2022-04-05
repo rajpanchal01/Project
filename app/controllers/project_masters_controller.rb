@@ -20,6 +20,7 @@ class ProjectMastersController < ApplicationController
   def new
     @users = User.order(created_at: :desc)
     @project_master = ProjectMaster.new
+    @clients = Client.order(created_at: :desc)
   end
 
   # GET /project_masters/1/edit

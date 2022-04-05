@@ -1,0 +1,144 @@
+<h3>Employees</h3>
+<style>
+
+</style>
+<div class="row">
+ <div class="col-lg-3">
+        <div class="card" style="border-radius: 15px;background-color:#F3F2F2">
+          <div class="card-body text-center">
+            <div class="mt-1 mb-2">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                class="rounded-circle img-fluid" style="width: 50px;"
+              />
+            </div>
+            <h4 class="mb-2">All Employee</h4>
+            <div class="d-flex justify-content-between text-center mt-5 mb-2">
+              <div>
+                <p class="mb-2 h6"><%=@users.count - 1%></p>
+                <p class="text-muted small mb-0">Total Employees </p>
+              </div>
+              <div class="px-3">
+                <p class="mb-2 h6"><%= @manager.count%> </p>
+                <p class="text-muted small mb-0">Project manager</p>
+              </div>
+              <div>
+                <p class="mb-2 h6"><%=@team.count - @manager.count%></p>
+                <p class="text-muted small mb-0">Team member</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+      <div class="col-lg-9 d-flex flex-row flex-nowrap overflow-auto">
+       <% @users.each do |user| %>
+
+     <% if user!=current_user %> 
+    <div class="col">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body  text-center">
+            <div class="mt-1 mb-2">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                class="rounded-circle img-fluid" style="width: 50px;"
+              />
+            </div>
+            <h4 class="mb-2"><%= user.username %></h4>
+             <a class="text-decoration-none" href="mailto:<%= user.email %>"><%= user.email %></a>
+            <p class="text-muted mb-3"><% if user.has_role? :manager %>
+            <small class="badge bg-warning text-dark">manager</small>
+            <% end%>
+            <span class="mx-2">
+            </span></p>
+            <div class="d-flex justify-content-between text-center mt-2 mb-4">
+              <div>
+                <p class="mb-2 h6"><%=@project.where(user_id: user.id).count%></p>
+                <p class="text-muted small mb-0">Total Project </p>
+              </div>
+              <div class="px-3">
+                <p class="mb-2 h6"><%=@project.where(phase: ['Started','On Going'] ,user_id: user.id).count%></p>
+                <p class="text-muted small mb-0">Project on-going</p>
+              </div>
+              <div>
+                <p class="mb-2 h6"><%=@project.where(phase: 'Completed' ,user_id: user.id).count%></p>
+                <p class="text-muted small mb-0">Project completed</p>
+              </div>
+            </div>
+            <%= button_to "Delete", edit_user_path(user) ,class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "Edit", edit_user_path(user) ,class: "float-right btn btn-sm btn-outline-info"  %>
+
+          </div>
+        </div>
+      </div>
+    <%end%> 
+<%end%>
+</div>
+</div>
+
+<hr>
+<h3>Clients</h3>
+
+<div class="row">
+ <div class="col-lg-3">
+        <div class="card" style="border-radius: 15px; background-color:#F3F2F2">
+          <div class="card-body text-center">
+            <div class="mt-1 mb-2">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                class="rounded-circle img-fluid" style="width: 50px;"
+              />
+            </div>
+            <h4 class="mb-2">All Clients</h4>
+            <div class="d-flex justify-content-between text-center mt-5 mb-2">
+              <div>
+                <p class="mb-2 h6"><%=@clients.count%></p>
+                <p class="text-muted small mb-0">Total Clients </p>
+              </div>
+              <div class="px-3">
+                <p class="mb-2 h6"><%=@project.count%></p>
+                <p class="text-muted small mb-0">Total Projects </p>
+              </div>
+              <div>
+                <p class="mb-2 h6"><%=@project.where(phase: ['Started','On Going']).count%></p>
+                <p class="text-muted small mb-0">On-going Projects</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-9 d-flex flex-row flex-nowrap overflow-auto">
+      <% @clients.each do |client| %>
+
+      <div class="col">
+        <div class="card" style="border-radius: 15px; ">
+          <div class="card-body text-center">
+            <div class="mt-1 mb-2">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                class="rounded-circle img-fluid" style="width: 50px;"
+              />
+            </div>
+            <h4 class="mb-2"><%= client.name %></h4>
+           <a class="text-decoration-none" href="mailto:<%= client.email %>"><%= client.email %></a></p>
+            <div class="d-flex justify-content-between text-center mt-2 mb-2">
+              <div>
+                <p class="mb-2 h6"><%=@project.where(client_id: client.id).count%></p>
+                <p class="text-muted small mb-0">Total Project </p>
+              </div>
+              <div class="px-3">
+                <p class="mb-2 h6"><%=@project.where(phase: ['Started','On Going'] ,client_id: client.id).count%></p>
+                <p class="text-muted small mb-0">Project on-going</p>
+              </div>
+              <div>
+                <p class="mb-2 h6"><%=@project.where(phase: ['Completed'] ,client_id: client.id).count%></p>
+                <p class="text-muted small mb-0">Project completed</p>
+              </div>
+            </div>
+           <%= button_to "Delete", edit_client_path(client) ,class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "Edit", edit_client_path(client) ,class: "float-right btn btn-sm btn-outline-info"  %>
+
+          </div>
+        </div>
+      </div>
+<%end%>
+</div>

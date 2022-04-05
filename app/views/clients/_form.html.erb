@@ -1,0 +1,21 @@
+<%=form_with model: @client do |form| %>
+
+<div class="field">
+    <%= form.label :name %><br />
+    <%= form.text_field :name  ,class: 'form-control'%>
+  </div>
+
+ <div class="field">
+    <%= form.label :email %><br />
+    <%= form.email_field :email  ,class: 'form-control'%>
+  </div>
+
+   <% if action_name == 'new'%>
+        <%= form.submit "Add Client",class: "btn btn-sm btn-outline-danger"  %> 
+
+    <% else %>
+        <%= form.submit "Update Client",class: "btn btn-sm btn-outline-danger"  %> 
+
+   <% end %>
+
+<% end %>

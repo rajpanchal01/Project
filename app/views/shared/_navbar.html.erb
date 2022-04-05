@@ -12,9 +12,20 @@
           </li> 
           <% if current_user.has_role? :admin %>
 
-          <li class="nav-item">
-             <%= link_to :USERS,dashboard_path ,class: 'link-light nav-link' %>
-          </li> 
+           <li class="nav-item dropdown">
+            <a class="nav-link link-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ADD NEW
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to :Project,new_project_master_path ,class: 'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+
+              <%= link_to :Client,new_client_path ,class: 'dropdown-item' %>
+              <%= link_to :Employee,new_user_path ,class: 'dropdown-item' %>
+            </div>
+          </li>
+
            <li class="nav-item">
              <%= link_to :PROJECTS,project_masters_path ,class: 'link-light nav-link' %>
           </li> 
