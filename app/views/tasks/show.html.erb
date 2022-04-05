@@ -26,6 +26,15 @@
   <%# <%= @task.user_id %> 
   <%=  User.find(@task.user_id).email %>
 </p>
+<p>
+  <b>Due_date:</b>
+  <%# <%= @task.user_id %> 
+  <%=  @task.due_date %>
+</p>
+<p>
+  <b>Completed_date:</b>
+  <%=  @task.completed_date %>
+</p>
 
 <%= link_to 'Edit', edit_project_master_task_path(@task.project_master, @task) %> |
 <%= link_to 'Back', project_master_path(@task.project_master) %>

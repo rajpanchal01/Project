@@ -7,6 +7,9 @@
   <%= link_to "Back to project ", project_masters_path ,class: "btn btn-outline-success btn-sm" %> 
 
 </div>
+<div class="row">
+  <%= render "shared/show_member" %>
+</div>
 <hr>
 <h3>New task</h3>
 
@@ -21,6 +24,7 @@
     <th>Status</th>
     <th>Project</th>
     <th>Assignedto</th>
+    <th>Due_date</th>
     <th></th>
     <th></th>
     <th></th>
@@ -35,6 +39,7 @@
     <%# <td><%= task.project_master %>
     <td><%= ProjectMaster.with_deleted.find(task.project_master_id).name %></td> 
     <td><%= User.with_deleted.find(task.user_id).email %></td> 
+    <td><%= task.due_date %></td>
 
     <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-sm btn-outline-success" %></td>
     <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn  btn-sm btn-outline-warning"%></td>

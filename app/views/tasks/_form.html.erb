@@ -20,15 +20,30 @@
     <%= f.label :description %><br />
     <%= f.text_area :description ,class:"form-control"%>
   </div>
+  <div class="row">
+      <div class="col">
+        <%= f.label :Due_date %>
+        <%= f.date_field :due_date,class: "form-control border-warning" %>
+      </div>
+      <div class="col">
+        <%= f.label :Completed_date %>
+        <%= f.date_field :completed_date,class: "form-control border-warning" %>
+     </div>
+  </div>
 <% else %>
-<%= f.label :name %>
+<%= f.label :Project_name%>
 <%= @task.project_master.name %><br />
-<%= f.label :description %>
+<%= f.label :Project_description%>
 <%= @task.project_master.description %><br />
 <%= f.label :Task_name %>
 <%= @task.name %><br />
 <%= f.label :Task_description %>
 <%= @task.description %><br />
+<%= f.label :Due_date %>
+<%= @task.due_date %><br />
+<%= f.label :completed_date %>
+<%= @task.completed_date %><br />
+
 <% end %>
   <div class="field">
     <%= f.label :status %><br />
@@ -36,8 +51,10 @@
   </div>  
 <% if current_user.id == @task.project_master.user_id or current_user.has_role?:admin %>
   <div class="field">
-    <%= f.label :Assign_to%><br />
-    <%= f.select :user_id, User.all.select{|a| !a.has_role? :admin }.map{ |t| [t.email, t.id]}, {}, class: "form-control" %>
+
+    <%= f.label :Assigned_to%><br/>
+    <% ids = [Member.where(project_master_id: @task.project_master.id).select(:user_id).pluck(:user_id),@task.project_master.user_id].flatten %>
+    <%= f.select :user_id, User.where(id: ids).map{ |t| [t.email, t.id]}, {}, class: "form-control" %>
   </div>
 <% end %>
 

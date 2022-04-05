@@ -1,31 +1,58 @@
-  
-<% if !current_user.has_role? :admin  %>
+<% if user_signed_in? %>
+  <h5>Welcome to Project Management Tool   </h5>
+  <span class="h4 text-success"><%= current_user.username %> </span>
+<% end %>
+
+<% if !current_user.has_role? :admin %>
+
 <h1>Task </h1>
 
     <% if @task.count > 0 %>
 
-  <table border='1' class ="table">
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Project</th>
-      <th>status</th>
-    
-    </tr>
+  <div class="row">
   <% @task.each do |task| %>
-      <%# <% if task.user_id == current_user.id %> 
-      <tr>
-      <td><%= task.name %></td>
-      <td><%= task.description %></td>
-      <td><%= task.status %></td>
-      <td><%= task.project_master.name%></td>
+     
+    <div class="col-md-4 " >
+    <div class="card shadow p-3 mb-5 bg-white rounded ">
+    <div class="card-body">
+    <% textcolor = ['text-info','text-success','text-danger','text-secondary','text-warning','text-primary']%>
+  <% 
+      bgcolor = 'bg-info'
+      case task.status
+      when 'not-started'
+        bgcolor = 'bg-secondary'
+      when 'in-Progress'
+        bgcolor = 'bg-info'
       
-      <td><%= link_to 'Edit Status', edit_project_master_task_path(task.project_master, task),class:"btn btn-outline-primary" %></td>
+      when 'complete'
+        bgcolor = 'bg-success'
       
-    </tr> 
+      end
+
+      %>
+
+      <h5 class="card-title text-bold text-uppercase <%=textcolor.sample%>" ><%=task.project_master.name %></h5>
+      <p class="card-text">Manager:<%= User.find(task.project_master.user_id).username %></p> 
+          <p class="card-text">Task: <%= task.name %></p> 
+          
+          <p class="card-text"><%= task.description %></p>
+      
+          <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= task.status %> </small></p>
+    
+          <p class="card-text">Due Date:<%= task.due_date %></small></p>
+    
+         <p>
+          <%= link_to "View task", edit_project_master_task_path(task.project_master, task),class: "btn btn-sm btn-outline-dark" %>
+          </p>
+         </div>
+      
+    
+    </div>
+
+    </div>
       
    <%end%>
+   </div>
    <%else%> 
       <h2> No task assigned </h2>
   <%end%>
