@@ -8,6 +8,7 @@ class MembersController < ApplicationController
         @member = Member.new(return_param)
         @member.update(project_master_id: @project.id)
         if @member.save!
+            MemberMailer.with(member: @member).new_member_email.deliver_later
             redirect_to members_path(@project.id)
         end
     end
