@@ -35,6 +35,7 @@ class ProjectMastersController < ApplicationController
 
     respond_to do |format|
       if @project_master.save
+        ProjectMasterMailer.with(project_master: @project_master).new_project_master_email.deliver_later
         format.html { redirect_to project_master_url(@project_master), notice: "Project  was successfully created." }
         format.json { render :show, status: :created, location: @project_master }
       else
