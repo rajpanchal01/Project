@@ -12,6 +12,7 @@ gem 'nested_scaffold'
 gem "sprockets-rails"
 
 gem "paranoia"
+gem "letter_opener", group: :development
 
 
 # Use postgres as the database for Active Record
