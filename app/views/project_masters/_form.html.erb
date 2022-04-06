@@ -71,7 +71,8 @@
 
   <div>
     <%= form.label :technology,'Technology', style: "display: block" %>
-    <%= form.select :technology,  options_for_select([ "ROR", "Node JS","React JS","Python","Laravel","Java" ]), {}, class: "form-control border-warning" %> 
+    <%# <%= form.select :technology, options_for_select([ "ROR", "Node JS","React JS","Python","Laravel","Java"  ],project_master.technology),{ :prompt => "Please select"}, { :multiple => true, :size => 5 ,class: 'form-control border-warning'} %> 
+    <%= form.select :technology, options_for_select(Technology.all.pluck(:tname),project_master.technology),{ :prompt => "Please select"}, { :multiple => true, :size => 5 ,class: 'form-control border-warning'} %>
   </div>
  
    <div class="row">

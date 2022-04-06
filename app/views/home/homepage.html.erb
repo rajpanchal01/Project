@@ -10,13 +10,45 @@
     <% if @task.count > 0 %>
 
   <div class="row">
+      <%notstarted = @task.where(status: 'not-started').count  %> 
+      <%inprogress = @task.where(status: 'in-Progress').count  %> 
+      <%complete = @task.where(status: 'complete').count  %> 
+      <div class="col-lg-4">
+        <div class="card shadow p-3 mb-5 bg-white rounded ">
+          <div class="card-body">
+
+            <h5 class="card-title text-bold text-center text-uppercase mb-3" > All Tasks </h5>
+
+            <h6 class="card-subtitle text-bold text-center mb-4"> Total Tasks : <%=@task.count %><% total = @task.count %></h6>  
+            <div class="progress mb-1">
+              <p class="card-text mr-1"> <small class="badge bg-danger text-white">Not Started</small> </p>
+              <% width = (notstarted.to_f/total)*100%>
+              <span class="progress-bar bg-danger" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"> <%=notstarted%></span>
+            </div>
+          
+            <div class="progress mb-1">
+              <p class="card-text mr-1"><small class="badge bg-info text-white">In Progress</small></p>
+              <% width = (inprogress.to_f/total)*100%>
+              <span class="progress-bar bg-info" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"><%=inprogress%></span>
+            </div>
+
+            <div class="progress mb-1">
+            <p class="card-text mr-1"><small class="badge bg-success text-white">Completed</small></p>
+              <% width = (complete.to_f/total)*100%>
+              <span class="progress-bar bg-success" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"><%=complete%></span>
+            </div>
+          
+
+          </div>
+        </div>
+        </div>
   <% @task.each do |task| %>
      
     <div class="col-md-4 " >
     <div class="card shadow p-3 mb-5 bg-white rounded ">
     <div class="card-body">
     <% textcolor = ['text-info','text-success','text-danger','text-secondary','text-warning','text-primary']%>
-  <% 
+     <% 
       bgcolor = 'bg-info'
       case task.status
       when 'not-started'

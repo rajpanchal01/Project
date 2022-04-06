@@ -9,6 +9,39 @@
   <div id="project_masters">
   <% if @project_masters.count > 0 %>
   <div class="row">
+  <div class="col-lg-4">
+  <div class="card shadow p-3 mb-5 bg-white rounded ">
+    <div class="card-body">
+
+      <h5 class="card-title text-bold text-center text-uppercase mb-3" > All Projects</h5>
+
+      <h6 class="card-subtitle text-bold text-center mb-4"> Total Project : <%=@project_masters.count %><% total = @project_masters.count %></h6>  
+      <div class="progress mb-1">
+        <p class="card-text mr-1"> <small class="badge bg-danger text-white">Not Started</small> <% notstarted = @project_masters.where(phase: 'Not Started').count %> </p>
+        <% width = (notstarted.to_f/total)*100%>
+        <span class="progress-bar bg-danger" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"> <%=notstarted%></span>
+      </div>
+       <div class="progress mb-1">
+       <p class="card-text mr-1"><small class="badge bg-info text-white">On Going</small><%ongoing = @project_masters.where(phase: 'On Going').count %></p>
+        <% width = (ongoing.to_f/total)*100%>
+        <span class="progress-bar bg-info" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"><%=ongoing%></span>
+      </div>
+       <div class="progress mb-1">
+       <p class="card-text mr-1"><small class="badge bg-warning text-white">On Hold</small><%onhold = @project_masters.where(phase: 'On Hold').count %></p>
+        <% width = (onhold.to_f/total)*100%>
+        <span class="progress-bar bg-warning" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"><%=onhold%></span>
+      </div>
+       <div class="progress  mb-1">
+        <p class="card-text mr-1"><small class="badge bg-success text-white">Completed</small><%completed =@project_masters.where(phase: 'Completed').count %></p>
+        <% width = (completed.to_f/total)*100%>
+        <span class="progress-bar bg-success" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"><%=completed%></span>
+      </div>
+     
+
+    </div>
+  </div>
+  </div>
+
   <% @project_masters.each do |project_master| %>
     <%= render project_master %>
   <% end %> 
