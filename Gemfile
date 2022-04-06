@@ -13,6 +13,7 @@ gem "sprockets-rails"
 
 gem "paranoia"
 gem "letter_opener", group: :development
+gem "figaro"
 
 
 # Use postgres as the database for Active Record
@@ -78,3 +79,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+#cancancan
+gem 'cancancan'
