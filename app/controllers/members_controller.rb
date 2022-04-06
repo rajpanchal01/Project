@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+    load_and_authorize_resource param_method: :return_param
+
     def new
         @project = ProjectMaster.find(params[:id])
     end
@@ -23,6 +25,6 @@ class MembersController < ApplicationController
 
     private
         def return_param
-            params.permit(:user_id)
+            params.require(:member).permit(:user_id)
         end
 end
