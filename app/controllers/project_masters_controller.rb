@@ -35,7 +35,7 @@ class ProjectMastersController < ApplicationController
 
     respond_to do |format|
       if @project_master.save
-        format.html { redirect_to project_master_url(@project_master), notice: "Project master was successfully created." }
+        format.html { redirect_to project_master_url(@project_master), notice: "Project  was successfully created." }
         format.json { render :show, status: :created, location: @project_master }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,16 +46,26 @@ class ProjectMastersController < ApplicationController
 
   # PATCH/PUT /project_masters/1 or /project_masters/1.json
   def update
-    respond_to do |format|
 
-      if @project_master.update(project_master_params)
-        format.html { redirect_to project_master_url(@project_master), notice: "Project master was successfully updated." }
-        format.json { render :show, status: :ok, location: @project_master }
+    # @project_master =  ProjectMaster.with_deleted.find(params[:id])
+      if @project.deleted_at.nil?
+        respond_to do |format|
+
+          if @project_master.update(project_master_params)
+            format.html { redirect_to project_master_url(@project_master), notice: "Project  was successfully updated." }
+            format.json { render :show, status: :ok, location: @project_master }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @project_master.errors, status: :unprocessable_entity }
+          end
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @project_master.errors, status: :unprocessable_entity }
+        @project.restore
+        redirect_to project_masters_path, notice: "Project was successfully restored."
       end
-    end
+
+
+   
   end
 
   # DELETE /project_masters/1 or /project_masters/1.json
@@ -71,8 +81,8 @@ class ProjectMastersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project_master
-      @project_master = ProjectMaster.find(params[:id])
-      @project = ProjectMaster.find(params[:id])
+      @project_master = ProjectMaster.with_deleted.find(params[:id])
+      @project = ProjectMaster.with_deleted.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

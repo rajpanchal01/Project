@@ -13,14 +13,15 @@ Rails.application.routes.draw do
   root 'home#homepage'
   get '/home', to: 'home#homepage'
   get '/users/:id/edit', to: 'users#editrole'
-  delete '/users/:id', to: 'users#destroy'
+  put '/project_master/:id', to: 'project_masters#update'
+  # delete '/users/:id', to: 'users#destroy'
 
   authenticate :user, ->(u) { u.has_role? :admin } do
   resources :users
   resources :clients
    get '/project_masters', :to => 'project_masters#index'
    get '/dashboard', to: 'home#dashboard'
-   delete '/users/:id', to: 'users#destroy'
+  #  delete '/users/:id', to: 'users#destroy'
 
   end
 
