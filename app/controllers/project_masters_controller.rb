@@ -88,6 +88,6 @@ class ProjectMastersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_master_params
-      params.require(:project_master).permit(:name, :description ,:user_id, :ptype ,:client_id,:client_requirements,:budget,:phase,:technology,:start_date,:end_date,:expected_duration)
+      params.require(:project_master).permit(:name, :description ,:user_id, :ptype ,:client_id,:client_requirements,:budget,:phase,{:technology => []},:start_date,:end_date,:expected_duration)
     end
 end

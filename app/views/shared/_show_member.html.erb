@@ -2,13 +2,13 @@
 <% if allmember.count > 0 %>
     <p class="pt-2">Member details:</p>
     <table class="table">
-        <thead>
+      
             <tr>
-                <td>Name</td>
-                <td>Email</td>
-                <td></td>
+                <th>Name</th>
+                <th>Email</th>
+                <th></th>
             </tr>
-        </thead>
+       
         <% allmember.each do |ele| %>
             <tr>
             <% user= (User.where(id: ele.user_id)) %>

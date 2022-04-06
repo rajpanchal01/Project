@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   def homepage
       @users = User.with_deleted.all
       # @task = Task.all.find_by_user_id(current_user.id)
-      @task = Task.with_deleted.where(user_id: current_user.id)
+      @task = Task.where(user_id: current_user.id).order('due_date')
       @clients = Client.with_deleted.all
       @manager = Role.find_by_name('manager').users
       @team = Role.find_by_name('employee').users

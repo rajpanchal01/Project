@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  has_many :issues
   acts_as_paranoid
   belongs_to :project_master
   validates :status, inclusion: {in: ['not-started','in-Progress','complete'] }
