@@ -1,0 +1,27 @@
+<h1>Listing issues</h1>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Answer</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @issues.each do |issue| %>
+  <tr>
+    <td><%= issue.question %></td>
+    <td><%= issue.answer %></td>
+    <td><%= issue.status %></td>
+    <%# <td><%= link_to 'Show', project_master_task_issue_path(issue.task, issue) %></td> 
+    <%# <td><%= link_to 'Edit', edit_task_issue_path(issue.task, issue) %></td> 
+    <%# <td><%= link_to 'Destroy', [issue.task, issue], method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Issue', new_project_master_task_issue_path(params[:project_master_id],params[:task_id]) %>

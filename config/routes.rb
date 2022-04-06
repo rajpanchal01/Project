@@ -2,8 +2,11 @@
 
 Rails.application.routes.draw do
   resources :project_masters  do
-    resources :tasks
+    resources :tasks  do
+      resources :issues
+    end
   end
+  
 
   devise_scope :user do
   get '/users/sign_out' ,to: 'devise/sessions#destroy'

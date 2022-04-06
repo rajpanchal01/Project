@@ -71,10 +71,20 @@
       
           <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= task.status %> </small></p>
     
-          <p class="card-text">Due Date:<%= task.due_date %></small></p>
-    
+          <% if Time.current > task.due_date%>
+
+          <p class="card-text">Due Date: <%= task.due_date.to_date%> <span class="text-danger">  <small class="badge bg-secondary text-white"> deadline missed</small></p>
+
+          <% else%>
+          <p class="card-text">Due Date: <%= task.due_date.to_date%> <span class="text-danger">( <%=( (task.due_date - Time.current)/ 1.day).round%> days left )</span></small></p>
+
+          <% end%>
          <p>
+
           <%= link_to "View task", edit_project_master_task_path(task.project_master, task),class: "btn btn-sm btn-outline-dark" %>
+          
+          <%= link_to "Issue", project_master_task_issues_path(task.project_master, task),class: "float-right btn btn-sm btn-danger" %>
+
           </p>
          </div>
       

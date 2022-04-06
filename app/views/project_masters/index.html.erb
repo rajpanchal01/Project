@@ -22,7 +22,7 @@
         <span class="progress-bar bg-danger" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"> <%=notstarted%></span>
       </div>
        <div class="progress mb-1">
-       <p class="card-text mr-1"><small class="badge bg-info text-white">On Going</small><%ongoing = @project_masters.where(phase: 'On Going').count %></p>
+       <p class="card-text mr-1"><small class="badge bg-info text-white">On Going</small><%ongoing = @project_masters.where(phase: 'Started').count  + @project_masters.where(phase: 'On Going').count %></p>
         <% width = (ongoing.to_f/total)*100%>
         <span class="progress-bar bg-info" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"><%=ongoing%></span>
       </div>
