@@ -30,7 +30,7 @@
     <th></th>
   </tr>
 
-<% @project_master.tasks.each do |task| %>
+<% @project_master.tasks.with_deleted.each do |task| %>
   <%if task.persisted?%>
   <tr>
     <td><%= task.name %></td>
@@ -42,8 +42,14 @@
     <td><%= task.due_date %></td>
 
     <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-sm btn-outline-success" %></td>
+    <% if task.deleted_at.nil? %>
     <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn  btn-sm btn-outline-warning"%></td>
     <td><%= button_to 'Destroy', [task.project_master, task], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-sm btn-outline-danger" %></td>
+   <% else %>
+      <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn disabled btn-sm btn-secondary"%></td>
+      <td><%=button_to 'Restore', project_master_task_path(task.project_master, task) ,method: :patch,class: "btn  btn-sm btn-danger"%></td>
+
+   <% end %>
   </tr>
   <% end %>
 <% end %>

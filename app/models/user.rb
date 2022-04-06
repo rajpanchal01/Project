@@ -8,8 +8,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   after_create :assign_default_role
-  has_many :project_masters ,dependent: :nullify
-  has_many :tasks ,dependent: :nullify
+  has_many :project_masters 
+  has_many :tasks 
   validate :must_have_a_role, on: :update
 
   private

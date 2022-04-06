@@ -33,8 +33,12 @@
       <p class="card-text"><small class="text-muted"><%= project_master.created_at.to_date %></small></p>
 
      <p>
+     <% if project_master.deleted_at.nil?%>
       <%= link_to "View project", project_master ,class: "btn btn-sm btn-outline-dark" %>
       <%= link_to "Add team member", members_path(project_master.id) ,class: "btn btn-sm btn-outline-dark" %>
+      <%else%>
+        <%=button_to "Restore",{ controller: :project_masters, action: :update,id: project_master.id },:action => 'update',method: :patch, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-danger"  %> 
+      <%end%>
       </p>
      </div>
   </div>

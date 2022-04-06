@@ -35,16 +35,21 @@ class TasksController < ApplicationController
 
   # PUT project_masters/1/tasks/1
   def update
-    if current_user.id == @task.project_master.user_id
-    if @task.update(task_params)
-      redirect_to(@task.project_master)
-      # redirect_to(@task.project_master, notice: 'Task was successfully updated.')
+    if @task.deleted_at.nil?
+        if current_user.id == @task.project_master.user_id
+          if @task.update(task_params)
+            redirect_to(@task.project_master)
+            # redirect_to(@task.project_master, notice: 'Task was successfully updated.')
+          else
+            render action: 'edit'
+          end
+        else @task.update(task_params)
+          redirect_to root_path
+        end
     else
-      render action: 'edit'
+      @task.restore
+      redirect_to(@task.project_master)
     end
-  else @task.update(task_params)
-    redirect_to root_path
-  end
   end
 
   # DELETE project_masters/1/tasks/1
@@ -57,11 +62,11 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project_master
-      @project_master = ProjectMaster.find(params[:project_master_id])
+      @project_master = ProjectMaster.with_deleted.find(params[:project_master_id])
     end
 
     def set_task
-      @task = @project_master.tasks.find(params[:id])
+      @task = @project_master.tasks.with_deleted.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
