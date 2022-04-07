@@ -26,6 +26,7 @@ class TasksController < ApplicationController
     @task = @project_master.tasks.build(task_params)
 
     if @task.save
+      TaskMailer.with(task: @task).new_task_email.deliver_later
       # redirect_to([@task.project_master, @task], notice: 'Task was successfully created.')
       redirect_to(@task.project_master)
     else

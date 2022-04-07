@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>You have been assigned '<%= Task.find(@task.id).name %>' task under <%= ProjectMaster.find(@task.project_master_id).name %> project!</p>
+  </body>
+</html>
