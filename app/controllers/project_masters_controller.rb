@@ -5,9 +5,9 @@ class ProjectMastersController < ApplicationController
   # GET /project_masters or /project_masters.json
   def index
     if current_user.has_role? :admin
-     @project_masters = ProjectMaster.with_deleted
+     @project_masters = ProjectMaster.with_deleted.order('expected_duration')
     else
-     @project_masters = current_user.project_masters
+     @project_masters = current_user.project_masters.order('expected_duration')
     end
   end
 

@@ -78,15 +78,15 @@
    <div class="row">
       <div class="col">
         <%= form.label :Start_date %>
-        <%= form.date_field :start_date,class: "form-control border-warning" %>
+        <%= form.date_field :start_date, min: Date.today ,class: "form-control border-warning" %>
       </div>
       <div class="col">
         <%= form.label :End_date %>
-        <%= form.date_field :end_date,class: "form-control border-warning" %>
+        <%= form.date_field :end_date, min: Date.today, class: "form-control border-warning" %>
      </div>
       <div class="col">
        <%= form.label :Expected_duration  %>
-       <%= form.date_field :expected_duration,class: "form-control border-warning" %>
+       <%= form.date_field :expected_duration,min: Date.today,class: "form-control border-warning" %>
       </div>  
    </div>
   <div>
