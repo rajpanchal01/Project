@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
     def editrole
         @user = User.with_deleted.find(params[:id])
+        @project = ProjectMaster.with_deleted.where(user_id: params[:id])
+        @task = Task.with_deleted.where(user_id: params[:id])
+
     end
       
     def update

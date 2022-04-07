@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
     def new
         @client = Client.new
+
     end
     def create
         @client = Client.new(client_params)
@@ -14,6 +15,7 @@ class ClientsController < ApplicationController
 
     def edit
         @client = Client.find(params[:id])
+        @project = ProjectMaster.with_deleted.where(client_id: params[:id])
     end
 
     def update
