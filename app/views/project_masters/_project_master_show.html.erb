@@ -40,11 +40,10 @@
 
         </div>
         <div class="col">
-          <p class="card-text"><b>Client Name:</b> <%= Client.find(@project_master.client_id).name %></p>
+          <p class="card-text"><b>Client Name:</b> <%= (@project_master.client_id)!=nil ? (Client.find(@project_master.client_id).name) : "not assigned" %></p>
           <p class="card-text"><b>Client Requirements:</b> <%= @project_master.client_requirements %></p>
           <p class="card-text"><b>Budget:</b> <%= @project_master.budget %></p>
           <p class="card-text"><b>Expected Duration:</b> <%  if !@project_master.expected_duration == nil %> <%=@project_master.expected_duration.to_date %> (<%= ((@project_master.expected_duration.to_time  - @project_master.created_at.to_time )/1.month.second).to_i%> months) <%end%></p>
-
         </div>
       </div>
      </div>
