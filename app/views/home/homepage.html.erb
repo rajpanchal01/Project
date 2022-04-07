@@ -5,8 +5,9 @@
 <br/>
 <% if !current_user.has_role? :admin %>
 <br/>
+
 <hr>
-<h2>Task </h2>
+<h2>Assigned Task </h2>
 
     <% if @task.count > 0 %>
 
@@ -14,7 +15,7 @@
       <%notstarted = @task.where(status: 'not-started').count  %> 
       <%inprogress = @task.where(status: 'in-Progress').count  %> 
       <%complete = @task.where(status: 'complete').count  %> 
-      <div class="col-lg-4">
+      <div class="col-lg-3">
         <div class="card shadow p-3 mb-5 bg-white rounded ">
           <div class="card-body">
 
@@ -43,9 +44,12 @@
           </div>
         </div>
         </div>
-  <% @task.each do |task| %>
-     
-    <div class="col-md-4 " >
+    <div class="col-lg-9 d-flex flex-row flex-nowrap overflow-auto">
+    <%# <div class="row " > %>
+
+    <% @task.all.where.not(status: 'complete').each do |task| %>
+
+    <div class="col-lg-4" >
     <div class="card shadow p-3 mb-5 bg-white rounded ">
     <div class="card-body">
     <% textcolor = ['text-info','text-success','text-danger','text-secondary','text-warning','text-primary']%>
@@ -65,14 +69,14 @@
       %>
 
       <h5 class="card-title text-bold text-uppercase <%=textcolor.sample%>" ><%=task.project_master.name %></h5>
-      <p class="card-text">Manager:<%= User.find(task.project_master.user_id).username %></p> 
+      <%# <p class="card-text">Manager:<%= User.find(task.project_master.user_id).username %></p>  
           <p class="card-text">Task: <%= task.name %></p> 
           
-          <p class="card-text"><%= task.description %></p>
+          <%# <p class="card-text"><%= task.description %></p> 
       
           <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= task.status %> </small></p>
     
-          <% if Time.current > task.due_date%>
+          <% if Time.current > task.due_date.to_date%>
 
           <p class="card-text">Due Date: <%= task.due_date.to_date%> <span class="text-danger">  <small class="badge bg-secondary text-white"> deadline missed</small></p>
 
@@ -88,13 +92,63 @@
 
           </p>
          </div>
-      
-    
     </div>
-
-    </div>
-      
+ </div>
    <%end%>
+ </div>
+ <%# </div> %>
+
+   <hr>
+  <h2>Completed Task </h2> 
+  <div class="row d-flex flex-row flex-nowrap overflow-auto">
+    <% @task.all.where(status: 'complete').each do |task| %>
+     <div class="col-md-3" >
+        <div class="card shadow p-3 mb-5 bg-white rounded ">
+           <div class="card-body">
+            <% textcolor = ['text-info','text-success','text-danger','text-secondary','text-warning','text-primary']%>
+              <% 
+                bgcolor = 'bg-info'
+                case task.status
+                when 'not-started'
+                  bgcolor = 'bg-secondary'
+                when 'in-Progress'
+                  bgcolor = 'bg-info'
+                
+                when 'complete'
+                  bgcolor = 'bg-success'
+                
+                end
+
+                %>
+            <h5 class="card-title text-bold text-uppercase <%=textcolor.sample%>" ><%=task.project_master.name %></h5>
+          <%# <p class="card-text">Manager:<%= User.find(task.project_master.user_id).username %></p>  
+          <p class="card-text">Task: <%= task.name %></p> 
+          
+          <%# <p class="card-text"><%= task.description %></p> 
+      
+          <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= task.status %> </small></p>
+    
+          <% if (Time.current > task.due_date.to_date) and (!task.status == 'complete') %>
+
+          <p class="card-text">Due Date: <%= task.due_date.to_date%> <span class="text-danger">  <small class="badge bg-secondary text-white"> deadline missed</small></p>
+
+          <% else%>
+          <p class="card-text">Due Date: <%= task.due_date.to_date%></small></p>
+
+          <% end%>
+         <p>
+
+          <%= link_to "View task", edit_project_master_task_path(task.project_master, task),class: "btn btn-sm btn-outline-dark" %>
+          
+          <%= link_to "Issue", project_master_task_issues_path(task.project_master, task),class: "float-right btn btn-sm btn-danger" %>
+
+          </p>
+         </div>
+          </div> 
+        </div>
+
+    <% end%>
+    </div>
    </div>
    <%else%> 
       <h2> No task assigned </h2>

@@ -1,20 +1,19 @@
 <% allmember = Member.where(project_master_id: @project.id)%>
 <% if allmember.count > 0 %>
-    <p class="pt-2">Member details:</p>
-    <table class="table">
+    <table class="">
       
             <tr>
-                <th>Name</th>
-                <th>Email</th>
+                <th></th>
+                <%# <th>Email</th> %>
                 <th></th>
             </tr>
        
         <% allmember.each do |ele| %>
             <tr>
             <% user= (User.where(id: ele.user_id)) %>
-            <td><%= user.last.username %></td>
-            <td><%= user.last.email %></td>
-            <td><%= link_to "Remove", destroy_path(ele.id), class: "btn btn-sm btn-secondary"%></td>
+            <td><%= user.last.username %>
+            <p> <small class="text-secondary"> <%= user.last.email %></small> </p></td>
+            <td><%= link_to "Remove", destroy_path(ele.id), class: "btn btn-sm btn-outline-danger"%></td>
             </tr>
         <% end %>
     </table>
