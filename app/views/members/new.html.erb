@@ -1,15 +1,25 @@
 <h2>Add team members</h2>
 
+<div class="row">
+<div class="col">
+
 <h4>Project Name: </h4>
 <p><%= @project.name %></p>
 
 <%= form_with model: @member, method: :post do |f| %>
+<p>Select team member :</p>
 <% ids = [Member.where(project_master_id: @project.id).select(:user_id).pluck(:user_id),(User.with_role :admin).pluck(:id),current_user.id].flatten %>
-<%= f.select :user_id, User.where.not(id: ids).map{ |t| [t.email, t.id]}, {} %>
+<%= f.select :user_id, User.where.not(id: ids).map{ |t| [t.email, t.id]}, {}, class: " form-control" %>
 <br/>
-<%= f.submit "Add member", class: "mt-2 btn btn-sm btn-outline-primary" %>
+<%= f.submit "Add member", class: " mt-2 btn btn-sm btn-outline-primary" %>
 <% end %>
 
+<%= link_to "Back to project ", project_masters_path ,class: "mt-4 btn btn-outline-success btn-sm" %>
+
+</div>
+<div class="col">
+<h4> Team Members </h4>
 <%= render "shared/show_member" %>
 
-<%= link_to "Back to project ", project_masters_path ,class: "mt-4 btn btn-outline-success btn-sm" %>
+</div>
+</div>

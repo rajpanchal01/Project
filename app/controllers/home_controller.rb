@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def homepage
-      @users = User.with_deleted.all
+      @users = User.with_deleted.order(updated_at: :DESC)
       # @task = Task.all.find_by_user_id(current_user.id)
       @task = Task.where(user_id: current_user.id).order('due_date')
       @clients = Client.with_deleted.all

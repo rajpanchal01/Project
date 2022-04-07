@@ -1,3 +1,33 @@
-<h1>Edit Client </h1>
+<h1><%= @client.name%></h1>
+
+<h2>Edit Client </h2>
 <%= render "form" %>
-  <%= link_to "Back to Dashboard ", home_path ,class: "btn btn-outline-success btn-sm" %> 
+<hr>
+<h1>Project </h1>
+
+<% if @project.all.count > 0 %>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Project Manager</th>
+            <th>Project Status</th>
+            <th>Billing</th>
+
+        </tr>
+        <thead>
+        <% @project.each do |ele| %>
+            <tr>
+                <td><%= ele.name %></td>
+                <td><%= ele.description %></td>
+                <td><%= User.with_deleted.find(ele.user_id).username %></td>
+                <td><%= ele.phase %></td>
+                <td><%= ele.budget %></td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <p>Currently no project in database!</p>
+<% end %>
+<%= link_to "Back to Dashboard ", home_path ,class: "btn btn-outline-success btn-sm" %> 

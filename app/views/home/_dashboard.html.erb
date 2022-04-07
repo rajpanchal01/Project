@@ -69,9 +69,9 @@
             </div>
             <% if user.deleted_at.nil? %>
 
-            <%=button_to "Delete",{ controller: :users, action: :destroy, id: user.id },method: :delete, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "Edit", edit_user_path(user) ,class: "float-right btn btn-sm btn-outline-info"  %>
+            <%=button_to "Delete",{ controller: :users, action: :destroy, id: user.id },method: :delete, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "View Profile", edit_user_path(user) ,class: "float-right btn btn-sm btn-outline-success"  %>
             <%else%>
-            <%=button_to "Restore",{ controller: :users, action: :update, id: user.id },method: :patch, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-danger"  %> <%= link_to "Edit", edit_user_path(user) ,class: "disabled float-right btn btn-sm btn-secondary"  %>
+            <%=button_to "Restore",{ controller: :users, action: :update, id: user.id },method: :patch, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-danger"  %> <%= link_to "View Profile", edit_user_path(user) ,class: "disabled float-right btn btn-sm btn-secondary"  %>
 
              <%end%>
           </div>
@@ -144,9 +144,9 @@
             </div>
             <% if client.deleted_at.nil? %>
 
-           <%=button_to "Delete",{ controller: :clients, action: :destroy, id: client.id },method: :delete, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "Edit", edit_client_path(client) ,class: "float-right btn btn-sm btn-outline-info"  %>
+           <%=button_to "Delete",{ controller: :clients, action: :destroy, id: client.id },method: :delete, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-outline-danger"  %> <%= link_to "View Profile", edit_client_path(client) ,class: "float-right btn btn-sm btn-outline-success"  %>
             <%else%>
-            <%=button_to "Restore",{ controller: :clients, action: :update, id: client.id },method: :patch, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-danger"  %> <%= link_to "Edit", edit_user_path(client) ,class: "disabled float-right btn btn-sm btn-secondary"  %>
+            <%=button_to "Restore",{ controller: :clients, action: :update, id: client.id },method: :patch, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-danger"  %> <%= link_to "View Profile", edit_user_path(client) ,class: "disabled float-right btn btn-sm btn-secondary"  %>
 
              <%end%>
           </div>

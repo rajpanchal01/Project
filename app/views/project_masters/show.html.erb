@@ -69,16 +69,15 @@
     <td><small class="badge <%=bgcolor%> text-white"><%= task.status %></small></td>
     <td><%= User.with_deleted.find(task.user_id).email %></td> 
     <td><%= task.due_date.to_date %></td>
-    <% if !task.completed_date.nil? and task.status == 'complete' %>
-    <%task.completed_date = task.updated_at%>
-    <td><%= task.updated_at.to_date %></td>
+    <% if task.completed_date.nil? and task.status == 'complete' %>
+    <td><%= task.updated_at.in_time_zone("Kolkata")%></td>
     <%else%>
     <td>Not completed</td>
 
     <%end%>
     <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-sm btn-outline-success" %></td>
     <% if task.deleted_at.nil? %>
-    <td><%= link_to task.issues.count, project_master_task_issues_path(task.project_master, task) ,class: "btn btn-sm btn-danger"%></td>
+    <td>Issues <%= link_to task.issues.count, project_master_task_issues_path(task.project_master, task) ,class: "btn btn-sm btn-danger"%></td>
     <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn  btn-sm btn-outline-warning"%></td>
     <td><%= button_to 'Destroy', [task.project_master, task], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-sm btn-outline-danger" %></td>
     <% else %>

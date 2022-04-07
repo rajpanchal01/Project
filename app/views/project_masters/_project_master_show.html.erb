@@ -1,7 +1,7 @@
 <div class="row" style="height: 25%">
 <div id="<%= dom_id @project_master %>">
 <% textcolor = ['text-info','text-success','text-danger','text-secondary','text-warning','text-primary']%>
- <% 
+    <% 
       bgcolor = 'bg-info'
       case @project_master.phase
       when 'Not Started'
@@ -34,8 +34,8 @@
           <p class="card-text"><b>Project Description: </b><%= @project_master.description %></p>
           <p class="card-text"><b>Project Type:</b> <%= @project_master.ptype %></p>
           <p class="card-text"><b>Start date: </b><% if !@project_master.start_date.nil? %> <%=@project_master.start_date.to_date %><%end%></p>     
-          <p class="card-text"><b>End date: </b><% if !@project_master.end_date.nil? %> <%=@project_master.start_date.to_date %><%end%></p>     
-          <p class="card-text"><b>Technology:</b> <%= @project_master.technology %></p>
+          <p class="card-text"><b>End date: </b><% if @project_master.end_date.nil? %> <%=@project_master.updated_at.to_date %><%end%></p>     
+          <p class="card-text"><b>Technology:</b> <%= @project_master.technology[1,@project_master.technology.length].join(",") %></p>
           <p class="card-text"> <b> Status:</b><small class="badge <%=bgcolor%> text-white"> <%= @project_master.phase %> </small> </p>
 
         </div>

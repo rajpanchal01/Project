@@ -2,21 +2,21 @@
 
 <div class="field">
     <%= form.label :username %><br />
-    <%= form.text_field :username  ,class: 'form-control'%>
+    <%= form.text_field :username  ,class: 'form-control border-warning'%>
   </div>
 
  <div class="field">
     <%= form.label :email %><br />
-    <%= form.email_field :email  ,class: 'form-control'%>
+    <%= form.email_field :email  ,class: 'form-control border-warning'%>
   </div>
     <% if action_name == 'new' %>
     <div class="field">
         <%= form.label :password %><br />
-        <%= form.password_field :password  ,class: 'form-control'%>
+        <%= form.password_field :password  ,class: 'form-control border-warning'%>
     </div>   
      <div class="field">
         <%= form.label :Confirmpassword %><br />
-        <%= form.password_field :password_confirmation  ,class: 'form-control'%>
+        <%= form.password_field :password_confirmation  ,class: 'form-control border-warning'%>
     </div>   
   
    <% end %>

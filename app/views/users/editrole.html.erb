@@ -1,3 +1,97 @@
-<h1>Edit </h1>
+<h1><%= @user.username%></h1>
+<h2>Edit Employee</h2>
 <%= render "form" %>
+<hr>
+<div class="row">
+<div class="col-lg-8">
+
+<h2><%= @user.username%>'s Projects</h2>
+<% if @project.all.count > 0 %>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Project Manager</th>
+            <th>Project Status</th>
+
+        </tr>
+        <thead>
+        <% @project.each do |ele| %>
+            <tr>
+                <td><%= ele.name %></td>
+                <td><small><%= ele.description %><small></td>
+                <td><%= User.with_deleted.find(ele.user_id).username %></td>
+                 <% 
+                    bgcolor = 'bg-info'
+                    case ele.phase
+                    when 'Not Started'
+                      bgcolor = 'bg-danger'
+                      when 'Started'
+                      bgcolor = 'bg-success'
+                    when 'On Going'
+                      bgcolor = 'bg-info'
+                    when 'On Hold'
+                      bgcolor = 'bg-warning'
+                    when 'Completed'
+                      bgcolor = 'bg-dark'
+                    when 'Maintenance'
+                      bgcolor = 'bg-primary'
+                    end
+
+                    %>
+                  <td><small class="badge <%=bgcolor%> text-white"> <%= ele.phase %> </small></td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <p>No Project assigned!</p>
+<% end %>
+
+
+</div>
+  <div class="col-lg-4">
+<h2><%= @user.username%>'s Tasks</h2>
+  <% if @task.all.count > 0 %>
+      <table class="table">
+          <thead>
+          <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Project Status</th>
+
+          </tr>
+          <thead>
+          <% @task.each do |ele| %>
+              <tr>
+                  <td><%= ele.name %></td>
+                  <td><small><%= ele.description %> </small></td>
+                   <% 
+                      bgcolor = 'bg-info'
+                      case ele.status
+                      when 'not-started'
+                        bgcolor = 'bg-danger'
+                      when 'in-Progress'
+                        bgcolor = 'bg-info'
+                      
+                      when 'complete'
+                        bgcolor = 'bg-success'
+                      
+                      end
+
+                      %>
+                  <td><small class="badge <%=bgcolor%> text-white"> <%= ele.status %> </small></td>
+              </tr>
+          <% end %>
+      </table>
+  <% else %>
+      <p>No task assigned!</p>
+  <% end %>
+
+  </div>
+</div>
+
+
+
+
   <%= link_to "Back to Dashboard ", home_path ,class: "btn btn-outline-success btn-sm" %> 
