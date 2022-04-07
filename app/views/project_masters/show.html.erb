@@ -7,9 +7,9 @@
   <%= link_to "Back to project ", project_masters_path ,class: "btn btn-outline-success btn-sm" %> 
 
 </div>
-<div class="row">
+<%# <div class="row">
   <%= render "shared/show_member" %>
-</div>
+<%# </div> %> 
 <hr>
 <h3>New task</h3>
 
@@ -20,11 +20,10 @@
 <table class="table">
   <tr>
     <th>Name</th>
-    <th>Description</th>
     <th>Status</th>
-    <th>Project</th>
     <th>Assignedto</th>
-    <th>Due_date</th>
+    <th>Due date</th>
+    <th>Completed date</th>
     <th></th>
     <th></th>
     <th></th>
@@ -34,19 +33,34 @@
   <%if task.persisted?%>
   <tr>
     <td><%= task.name %></td>
-    <td><%= task.description %></td>
-    <td><%= task.status %></td>
-    <%# <td><%= task.project_master %>
-    <td><%= ProjectMaster.with_deleted.find(task.project_master_id).name %></td> 
-    <td><%= User.with_deleted.find(task.user_id).email %></td> 
-    <td><%= task.due_date %></td>
+     <% 
+      bgcolor = 'bg-danger'
+      case task.status
+      when 'not-started'
+        bgcolor = 'bg-danger'
+      when 'in-Progress'
+        bgcolor = 'bg-warning'
+      when 'complete'
+        bgcolor = 'bg-success'
+      end
 
+      %>
+    <td><small class="badge <%=bgcolor%> text-white"><%= task.status %></small></td>
+    <td><%= User.with_deleted.find(task.user_id).email %></td> 
+    <td><%= task.due_date.to_date %></td>
+    <% if !task.completed_date.nil? and task.status == 'complete' %>
+    <%task.completed_date = task.updated_at%>
+    <td><%= task.updated_at.to_date %></td>
+    <%else%>
+    <td>Not completed</td>
+
+    <%end%>
     <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-sm btn-outline-success" %></td>
     <% if task.deleted_at.nil? %>
     <td><%= link_to task.issues.count, project_master_task_issues_path(task.project_master, task) ,class: "btn btn-sm btn-danger"%></td>
     <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn  btn-sm btn-outline-warning"%></td>
     <td><%= button_to 'Destroy', [task.project_master, task], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-sm btn-outline-danger" %></td>
-   <% else %>
+    <% else %>
       <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn disabled btn-sm btn-secondary"%></td>
       <td><%=button_to 'Restore', project_master_task_path(task.project_master, task) ,method: :patch,class: "btn  btn-sm btn-danger"%></td>
 

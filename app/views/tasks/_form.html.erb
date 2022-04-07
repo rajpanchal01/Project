@@ -23,7 +23,7 @@
   <div class="row">
       <div class="col">
         <%= f.label :Due_date %>
-        <%= f.date_field :due_date,class: "form-control border-warning" %>
+        <%= f.date_field :due_date,:required => true,class: "form-control border-warning" %>
       </div>
       <div class="col">
         <%= f.label :Completed_date %>

@@ -17,7 +17,7 @@
             <h4 class="mb-2">All Employee</h4>
             <div class="d-flex justify-content-between text-center mt-5 mb-2">
               <div>
-                <p class="mb-2 h6"><%=@users.count - 1%></p>
+                <p class="mb-2 h6"><%=@users.count%></p>
                 <p class="text-muted small mb-0">Total Employees </p>
               </div>
               <div class="px-3">
@@ -32,8 +32,8 @@
           </div>
         </div>
       </div>
-   
-      <div class="col-lg-9 d-flex flex-row flex-nowrap overflow-auto">
+
+    <div class="col-lg-9 d-flex flex-row flex-nowrap overflow-auto">
        <% @users.each do |user| %>
 
      <% if user!=current_user %> 

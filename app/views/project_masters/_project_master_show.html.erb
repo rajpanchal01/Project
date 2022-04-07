@@ -23,7 +23,7 @@
     <div class="card-body">
       <h5 class="card-title text-bold text-uppercase <%=textcolor.sample%>">
       
-        <%= button_to "Delete project ", @project_master, method: :delete ,class: " btn btn-outline-danger btn-sm float-right" %>
+        <%= button_to "Delete project ", @project_master, method: :delete ,class: " btn btn-danger btn-sm float-right" %>
       <%= @project_master.name %> </h5> 
 
         <div class="row">
@@ -33,8 +33,8 @@
           <h6 class="card-text"> <b> Project Manager:</b> <%= User.with_deleted.find(@project_master.user_id).username%></h6>
           <p class="card-text"><b>Project Description: </b><%= @project_master.description %></p>
           <p class="card-text"><b>Project Type:</b> <%= @project_master.ptype %></p>
-          <p class="card-text"><b>Start date: </b><% if !@project_master.start_date  == nil %> <%=@project_master.start_date.to_date %><%end%></p>     
-          <p class="card-text"><b>End date: </b><% if !@project_master.end_date  == nil %> <%=@project_master.start_date.to_date %><%end%></p>     
+          <p class="card-text"><b>Start date: </b><% if !@project_master.start_date.nil? %> <%=@project_master.start_date.to_date %><%end%></p>     
+          <p class="card-text"><b>End date: </b><% if !@project_master.end_date.nil? %> <%=@project_master.start_date.to_date %><%end%></p>     
           <p class="card-text"><b>Technology:</b> <%= @project_master.technology %></p>
           <p class="card-text"> <b> Status:</b><small class="badge <%=bgcolor%> text-white"> <%= @project_master.phase %> </small> </p>
 
@@ -43,7 +43,13 @@
           <p class="card-text"><b>Client Name:</b> <%= (@project_master.client_id)!=nil ? (Client.find(@project_master.client_id).name) : "not assigned" %></p>
           <p class="card-text"><b>Client Requirements:</b> <%= @project_master.client_requirements %></p>
           <p class="card-text"><b>Budget:</b> <%= @project_master.budget %></p>
-          <p class="card-text"><b>Expected Duration:</b> <%  if !@project_master.expected_duration == nil %> <%=@project_master.expected_duration.to_date %> (<%= ((@project_master.expected_duration.to_time  - @project_master.created_at.to_time )/1.month.second).to_i%> months) <%end%></p>
+          <p class="card-text"><b>Expected Duration:</b> <%  if !@project_master.expected_duration.nil? %> <%=@project_master.expected_duration.to_date %>( <%= ((@project_master.expected_duration.to_time - @project_master.created_at.to_time)/ 1.day).round%> days) <% end %></p>
+        </div>
+        <div class="col">
+         <h5 class="card-title text-bold "> Team Member </h5>
+           <div style="overflow-y: scroll; scrollbar-width: none; height: 300px;">
+           <%= render "shared/show_member" %>
+        </div>
         </div>
       </div>
      </div>
