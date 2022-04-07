@@ -25,6 +25,9 @@
 </table>
 
 <br />
-<% if current_user.id != @task.project_master.user_id %>
+<% if current_user.id == @task.project_master.user_id   or current_user.has_role? :admin%>
+<%= link_to 'back', project_master_path(@task.project_master),class: "btn btn-sm btn-outline-success" %>
+<% else %>
 <%= link_to 'New Issue', new_project_master_task_issue_path(params[:project_master_id],params[:task_id]),class: "btn btn-sm btn-outline-dark" %>
-<% end %>
+<%= link_to 'back', home_path,class: "btn btn-sm btn-outline-dark" %>
+<%end%>

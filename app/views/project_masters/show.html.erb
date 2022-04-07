@@ -69,9 +69,8 @@
     <td><small class="badge <%=bgcolor%> text-white"><%= task.status %></small></td>
     <td><%= User.with_deleted.find(task.user_id).email %></td> 
     <td><%= task.due_date.to_date %></td>
-    <% if !task.completed_date.nil? and task.status == 'complete' %>
-    <%task.completed_date = task.updated_at%>
-    <td><%= task.updated_at.to_date %></td>
+    <% if task.completed_date.nil? and task.status == 'complete' %>
+    <td><%= task.updated_at.in_time_zone("Kolkata")%></td>
     <%else%>
     <td>Not completed</td>
 
