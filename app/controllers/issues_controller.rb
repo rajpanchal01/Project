@@ -33,8 +33,9 @@ class IssuesController < ApplicationController
 
   # PUT tasks/1/issues/1
   def update
-    if @issue.update_attributes(issue_params)
-      redirect_to([@issue.task, @issue], notice: 'Issue was successfully updated.')
+    @issue=Issue.find(params[:id])
+    if @issue.update(issue_params)
+      redirect_to project_master_task_issues_url, notice: 'Issue was successfully updated.'
     else
       render action: 'edit'
     end
@@ -44,7 +45,7 @@ class IssuesController < ApplicationController
   def destroy
     @issue.destroy
 
-    redirect_to task_issues_url(@task)
+    redirect_to project_master_task_issues_url(@task)
   end
 
   private

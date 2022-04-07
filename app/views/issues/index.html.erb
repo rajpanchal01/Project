@@ -1,6 +1,6 @@
 <h1>Listing issues</h1>
 
-<table>
+<table >
   <tr>
     <th>Question</th>
     <th>Answer</th>
@@ -15,13 +15,15 @@
     <td><%= issue.question %></td>
     <td><%= issue.answer %></td>
     <td><%= issue.status %></td>
-    <%# <td><%= link_to 'Show', project_master_task_issue_path(issue.task, issue) %></td> 
-    <%# <td><%= link_to 'Edit', edit_task_issue_path(issue.task, issue) %></td> 
-    <%# <td><%= link_to 'Destroy', [issue.task, issue], method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+    <td><%= link_to 'Edit', edit_project_master_task_issue_path(issue.task.project_master,issue.task,issue)%></td> 
+    <% if current_user.id==issue.task.project_master.user_id %>
+    <td><%= button_to 'Solved',  project_master_task_issue_path(issue.task.project_master,issue.task,issue),method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+    <%end%>
   </tr>
 <% end %>
 </table>
 
 <br />
-
+<% if current_user.id != @task.project_master.user_id %>
 <%= link_to 'New Issue', new_project_master_task_issue_path(params[:project_master_id],params[:task_id]) %>
+<% end %>
