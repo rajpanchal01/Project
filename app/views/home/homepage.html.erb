@@ -39,15 +39,47 @@
               <% width = (complete.to_f/total)*100%>
               <span class="progress-bar bg-success" role="progressbar" style="width: <%=width%>%" aria-valuenow="<%=width%>" aria-valuemin="0" aria-valuemax="100"><%=complete%></span>
             </div>
-          
+            <br>
+            <br>
+
+          <div class="nav-item dropdown">
+            <a class="btn btn-sm btn-outline-success nav-link link-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Filter
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "All",home_path() ,class: 'dropdown-item' %>
+
+              <%= link_to "This week",home_path(filter: 'this-week') ,class: 'dropdown-item' %>
+              <%# <div class="dropdown-divider"></div> %>
+
+              <%= link_to "Next week",home_path(filter: 'next-week') ,class: 'dropdown-item' %>
+              <%# <div class="dropdown-divider"></div> %>
+              <%= link_to "This month",home_path(filter: 'this-month') ,class: 'dropdown-item' %>
+
+              </div>
+          </div>
+
+            <%# <%=params[:filter]%> 
 
           </div>
         </div>
         </div>
     <div class="col-lg-9 d-flex flex-row flex-nowrap overflow-auto">
     <%# <div class="row " > %>
+    
+    <% if params[:filter] == 'this-week'
+        @tasks = @task.where("due_date > ? AND due_date < ?", Time.now, Time.now.end_of_week).each
+      elsif params[:filter] == 'next-week'
+        @tasks = @task.where("due_date > ? AND due_date < ?", Time.now.next_week, Time.now.next_week.end_of_week).each
+      elsif params[:filter] == 'this-month'
+        @tasks = @task.where("due_date > ? AND due_date < ?", Time.now, Time.now.end_of_month).each
+      else
+        @tasks = @task.all.where.not(status: 'complete')
+      end
+    %>
 
-    <% @task.all.where.not(status: 'complete').each do |task| %>
+    <% @tasks.each do |task| %>
 
     <div class="col-lg-4" >
     <div class="card shadow p-3 mb-5 bg-white rounded ">

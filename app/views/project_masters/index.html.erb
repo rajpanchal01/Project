@@ -1,7 +1,20 @@
 
 <h1 class="text-dark font-weight-bold" >Project </h1>
 <% if current_user.has_role? :admin %>
-<%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-info" %>
+  <%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-info" %>
+
+  <a class="float-right nav-link link-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter By <b>Project Manager </b>:
+     </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <%= link_to 'All', project_masters_path() ,class: 'dropdown-item' %>
+      <% (User.with_role:manager).each do |f|%>
+      <%= link_to f.email, project_masters_path(id: f.id ) ,class: 'dropdown-item' %>
+      <% end%>
+
+    </div>
+  
+
 <% end %>
 <br>
 <br>
@@ -41,7 +54,10 @@
     </div>
   </div>
   </div>
-
+     <% if params[:id] 
+      @project_masters = @project_masters.where(user_id: params[:id]).each
+      end
+    %>
   <% @project_masters.each do |project_master| %>
     <%= render project_master %>
   <% end %> 

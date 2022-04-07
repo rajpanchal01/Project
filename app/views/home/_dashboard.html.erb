@@ -7,7 +7,7 @@
 <div class="row">
  <div class="col-lg-3">
         <div class="card" style="border-radius: 15px;background-color:#F3F2F2">
-          <div class="card-body text-center">
+          <div class="card-body text-center pb-5">
             <div class="mt-1 mb-2">
               <img
                 src="https://cdn.pixabay.com/photo/2014/04/03/11/47/person-312160_960_720.png"
@@ -28,13 +28,30 @@
                 <p class="mb-2 h6"><%=@team.count - @manager.count%></p>
                 <p class="text-muted small mb-0">Team member</p>
               </div>
+                </div>
+               <a class=" nav-link link-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Filter By <b>Project Manager </b>:
+                  </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%= link_to 'All', home_path() ,class: 'dropdown-item' %>
+                    <%= link_to 'Project Manager', home_path(type: '1') ,class: 'dropdown-item' %>
+                    <%= link_to 'Employee', home_path(type: '2') ,class: 'dropdown-item' %>                    
             </div>
           </div>
         </div>
       </div>
 
     <div class="col-lg-9 d-flex flex-row flex-nowrap overflow-auto">
-       <% @users.each do |user| %>
+    <% 
+    if params[:type]
+      if params[:type] == '1'
+        @users = (@users.with_role:manager).each
+      else
+        @users = (@users.with_role:employee).each
+      end
+    end
+    %>
+  <% @users.each do |user| %>
 
      <% if user!=current_user %> 
     <div class="col">
