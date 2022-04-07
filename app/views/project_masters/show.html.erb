@@ -11,9 +11,30 @@
   <%= render "shared/show_member" %>
 <%# </div> %> 
 <hr>
-<h3>New task</h3>
 
-<%= render 'tasks/form' %>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New Task</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Task</h5>
+        
+      </div>
+      <div class="modal-body">
+      <%= render 'tasks/form' %>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+       
+
 <hr>
 <h3>Listing tasks</h3>
 
