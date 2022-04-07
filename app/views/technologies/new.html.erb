@@ -1,0 +1,30 @@
+<p>Add New Technology</p>
+
+<%= form_with model: @technology, method: :post do |f| %>
+<%= f.text_field :tname %><br/>
+<%= f.text_field :ttype %><br/>
+<%= f.submit "Add Tech", class: "mt-2 btn btn-sm btn-outline-primary" %>
+<% end %>
+<br/>
+<% if Technology.all.count > 0 %>
+<p>Current/Existing Technologies</p>
+    <table>
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Type</td>
+            <td></td>
+        </tr>
+        <thead>
+        <% Technology.all.each do |ele| %>
+            <tr>
+                <td><%= ele.tname %></td>
+                <td><%= ele.ttype %></td>
+                <td><%= link_to "Remove", techdestroy_path(ele.id), class: "btn btn-sm btn-secondary"%></td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <p>Currently no tech present in database!</p>
+<% end %>
+<br/>

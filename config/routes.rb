@@ -34,7 +34,11 @@ Rails.application.routes.draw do
   
   get "/members/:id", to: "members#new", as: "members"
   post "/members/:id", to: "members#create", as: "create"
-  get "/members/destroy/:id", to: "members#destroy", as: "destroy"  
+  get "/members/destroy/:id", to: "members#destroy", as: "destroy"
+  
+  get "/technologies/new", to: "technologies#new", as: "technologies"
+  post "/technologies/new", to: "technologies#create", as: "techcreate"
+  get "/technologies/:id", to: "technologies#destroy", as: "techdestroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
   # root "articles#index"
