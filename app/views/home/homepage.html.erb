@@ -69,11 +69,11 @@
     <%# <div class="row " > %>
     
     <% if params[:filter] == 'this-week'
-        @tasks = @task.where("due_date > ? AND due_date < ?", Time.now, Time.now.end_of_week).each
+        @tasks = @task.where("status!='complete' AND due_date > ? AND due_date < ?", Time.now, Time.now.end_of_week).each
       elsif params[:filter] == 'next-week'
-        @tasks = @task.where("due_date > ? AND due_date < ?", Time.now.next_week, Time.now.next_week.end_of_week).each
+        @tasks = @task.where("status!='complete' AND due_date > ? AND due_date < ?", Time.now.next_week, Time.now.next_week.end_of_week).each
       elsif params[:filter] == 'this-month'
-        @tasks = @task.where("due_date > ? AND due_date < ?", Time.now, Time.now.end_of_month).each
+        @tasks = @task.where("status!='complete' AND due_date > ? AND due_date < ?", Time.now, Time.now.end_of_month).each
       else
         @tasks = @task.all.where.not(status: 'complete')
       end

@@ -4,7 +4,7 @@
   <%= link_to "Create New Project", new_project_master_path ,class: "btn btn-outline-info" %>
 
   <a class="float-right nav-link link-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Filter By <b>Project Manager </b>:
+    Filter by <b><%= params[:id].nil? ? "All (Manager)" : (User.find(params[:id]).email) %></b>
      </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <%= link_to 'All', project_masters_path() ,class: 'dropdown-item' %>
