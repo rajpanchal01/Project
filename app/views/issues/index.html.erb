@@ -18,7 +18,7 @@
     <td><%= issue.status %></td>
     <td><%= link_to 'Edit', edit_project_master_task_issue_path(issue.task.project_master,issue.task,issue),class: "btn btn-sm btn-outline-dark" %></td> 
     <% if current_user.id==issue.task.project_master.user_id %>
-    <td><%= button_to 'Solved',  project_master_task_issue_path(issue.task.project_master,issue.task,issue),method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+    <td><%= button_to 'Solved',  project_master_task_issue_path(issue.task.project_master,issue.task,issue),method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-sm btn-outline-success"%></td> 
     <%end%>
   </tr>
 <% end %>

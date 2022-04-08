@@ -3,7 +3,7 @@
 
 <div>  
 
-  <%= link_to "Edit this project ", edit_project_master_path(@project_master) ,class: "btn btn-outline-warning btn-sm" %> |
+  <%= link_to "Edit this project ", edit_project_master_path(@project_master) ,class: "btn btn-outline-dark btn-sm" %> |
   <%= link_to "Back to project ", project_masters_path ,class: "btn btn-outline-success btn-sm" %> 
 
 </div>
@@ -46,7 +46,7 @@
     <th>Due date</th>
     <th>Completed date</th>
     <th></th>
-    <th></th>
+    <th>Actions</th>
     <th></th>
   </tr>
 
@@ -77,7 +77,13 @@
     <%end%>
     <td><%= link_to 'Show', [task.project_master, task],class: "btn btn-sm btn-outline-success" %></td>
     <% if task.deleted_at.nil? %>
-    <td>Issues <%= link_to task.issues.count, project_master_task_issues_path(task.project_master, task) ,class: "btn btn-sm btn-danger"%></td>
+
+    <td>
+    <% if task.issues.count > 0 %>
+    
+     <%= link_to 'Issues '+(task.issues.count).to_s, project_master_task_issues_path(task.project_master, task) ,class: "btn btn-sm btn-danger"%>
+     <%end%>
+     </td>
     <td><%= link_to 'Edit', edit_project_master_task_path(task.project_master, task) ,class: "btn  btn-sm btn-outline-warning"%></td>
     <td><%= button_to 'Destroy', [task.project_master, task], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-sm btn-outline-danger" %></td>
     <% else %>

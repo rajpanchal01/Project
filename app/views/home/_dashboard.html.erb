@@ -47,7 +47,7 @@
       if params[:type] == '1'
         @users = (@users.with_role:manager).each
       else
-        @users = (@users.with_role:employee).each
+        @users = (@users.without_role:manager).each
       end
     end
     %>

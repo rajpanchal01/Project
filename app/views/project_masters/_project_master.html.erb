@@ -28,14 +28,14 @@
 
       <p class="card-text"> <%= project_master.description %></p>
 
-      <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= project_master.phase %> </small><small class="badge float-right bg-danger text-white">Due date :  <%= project_master.expected_duration.nil? ? "not given" : project_master.expected_duration.to_date %> </small></p>
+      <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= project_master.phase %> </small><small class="badge float-right bg-secondary text-white">Due date :  <%= project_master.expected_duration.nil? ? "not given" : project_master.expected_duration.to_date %> </small></p>
 
       <p class="card-text">Start date <small class="text-muted"><%= project_master.start_date.nil? ? "" : project_master.start_date.to_date %></small> </p>
 
      <p>
      <% if project_master.deleted_at.nil?%>
       <%= link_to "View project", project_master ,class: "btn btn-sm btn-outline-dark" %>
-      <%= link_to "Add team member", members_path(project_master.id) ,class: "btn btn-sm btn-outline-dark" %>
+      <%= link_to "Add team member", members_path(project_master.id) ,class: "btn float-right btn-sm btn-outline-success" %>
       <%else%>
         <%=button_to "Restore",{ controller: :project_masters, action: :update,id: project_master.id },:action => 'update',method: :patch, data: { confirm: 'Are you sure?' },class: "float-left btn btn-sm btn-danger"  %> 
       <%end%>
