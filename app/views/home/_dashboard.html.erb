@@ -30,7 +30,7 @@
               </div>
                 </div>
                <a class=" nav-link link-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Filter By <b>Project Manager </b>:
+                  Filter by <b><%= params[:type].nil? ? "All" : ((params[:type] == '1')? "Manager" : "Employee") %></b>
                   </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <%= link_to 'All', home_path() ,class: 'dropdown-item' %>
@@ -77,7 +77,7 @@
               </div>
               <div class="px-3">
                 <p class="mb-2 h6"><%=@project.where(phase: ['Started','On Going'] ,user_id: user.id).count%></p>
-                <p class="text-muted small mb-0">Project on-going</p>
+                <p class="text-muted small mb-0">Project on - going</p>
               </div>
               <div>
                 <p class="mb-2 h6"><%=@project.where(phase: 'Completed' ,user_id: user.id).count%></p>
