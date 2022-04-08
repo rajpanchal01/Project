@@ -11,7 +11,7 @@
   <%= render "shared/show_member" %>
 <%# </div> %> 
 <hr>
-
+<% if @project_master.phase != 'Not Started' %>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New Task</button>
 
@@ -98,4 +98,5 @@
 
 <br />
 
+<%end%>
 <%# <%= link_to 'New Task', new_project_master_task_path(:project_master_id) %> 
