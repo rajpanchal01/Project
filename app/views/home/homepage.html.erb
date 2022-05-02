@@ -112,7 +112,13 @@
           <%# <p class="card-text"><%= task.description %></p> 
       
           <p class="card-text"><small class="badge <%=bgcolor%> text-white"> <%= task.status %> </small></p>
-    
+          <div class ="row">
+          <% Task::STATUS_OPTIONS.slice(1,2).each do |status|%>
+            <div class="col">
+            <%= button_to status[0],update_status_project_master_task_path(task.project_master,task,status: status[1]),method: :patch,class: "btn btn-sm btn-outline-dark" %>
+            </div>
+            <% end %>
+          </div>
           <% if Time.current > task.due_date.to_date%>
 
           <p class="card-text">Due Date: <%= task.due_date.to_date%> <span class="text-danger">  <small class="badge bg-secondary text-white"> deadline missed</small></p>
@@ -124,9 +130,9 @@
          <p>
 
           <%= link_to "View task", edit_project_master_task_path(task.project_master, task),class: "btn btn-sm btn-outline-dark" %>
-          
+          <% if task.status =='in-Progress' %>
           <%= link_to "Issue", project_master_task_issues_path(task.project_master, task),class: "float-right btn btn-sm btn-danger" %>
-
+          <% end %>
           </p>
          </div>
     </div>

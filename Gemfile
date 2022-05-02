@@ -14,7 +14,7 @@ gem "sprockets-rails"
 gem "paranoia"
 gem "letter_opener", group: :development
 gem "figaro"
-
+gem "pundit"
 
 # Use postgres as the database for Active Record
 gem "pg"

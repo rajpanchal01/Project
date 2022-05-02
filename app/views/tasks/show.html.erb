@@ -32,8 +32,10 @@
   <%=  @task.due_date %>
 </p>
 <p>
+  <% if @task.status=="complete"%>
   <b>Completed_date:</b>
-  <%=  @task.completed_date %>
+  <%=  @task.updated_at.to_date %>
+  <%end%>
 </p>
 
 <%= link_to 'Edit', edit_project_master_task_path(@task.project_master, @task) %> |
