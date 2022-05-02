@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :project_masters  do
     resources :tasks  do
       resources :issues
+      member do 
+        patch :update_status
+      end
     end
   end
   

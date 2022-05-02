@@ -31,25 +31,30 @@
      </div>
   </div>
 <% else %>
-<%= f.label :Project_name%>
+<b><%= f.label :Project_name%></b>
 <%= @task.project_master.name %><br />
-<%= f.label :Project_description%>
+<b><%= f.label :Project_description%></b>
 <%= @task.project_master.description %><br />
-<%= f.label :Task_name %>
+<b><%= f.label :Task_name %></b>
 <%= @task.name %><br />
-<%= f.label :Task_description %>
+<b><%= f.label :Task_description %></b>
 <%= @task.description %><br />
-<%= f.label :Due_date %>
+<b><%= f.label :Due_date %></b>
 <%= @task.due_date %><br />
-<%= f.label :completed_date %>
-<%= @task.completed_date %><br />
+<b><%= f.label :completed_date %></b>
+<% if @task.status == "complete"%>
+<%= @task.updated_at.to_date%><br />
+<% end %>
+<b><%= f.label :status %></b>
+<%= @task.status %><br />
 
 <% end %>
+<% if current_user.id == @task.project_master.user_id or current_user.has_role?:admin %>
   <div class="field">
     <%= f.label :status %><br />
     <%= f.select :status,Task::STATUS_OPTIONS,{},class:"form-control" %>
   </div>  
-<% if current_user.id == @task.project_master.user_id or current_user.has_role?:admin %>
+
   <div class="field">
 
     <%= f.label :Assigned_to%><br/>

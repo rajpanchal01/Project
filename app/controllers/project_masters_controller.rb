@@ -4,15 +4,19 @@ class ProjectMastersController < ApplicationController
 
   # GET /project_masters or /project_masters.json
   def index
+    
     if current_user.has_role? :admin
      @project_masters = ProjectMaster.with_deleted.order('expected_duration')
+     
     else
      @project_masters = current_user.project_masters.order('expected_duration')
+     authorize @project_masters
     end
   end
 
   # GET /project_masters/1 or /project_masters/1.json
   def show
+    authorize @project_master
     @task = @project_master.tasks.build
   end
 
@@ -20,6 +24,7 @@ class ProjectMastersController < ApplicationController
   def new
     @users = User.with_deleted.order(created_at: :desc)
     @project_master = ProjectMaster.new
+    authorize @project_master
     @clients = Client.order(created_at: :desc)
   end
 
@@ -32,7 +37,7 @@ class ProjectMastersController < ApplicationController
   def create
     @project_master = ProjectMaster.new(project_master_params)
     # @project_master = current_user.project_masters.build(project_master_params)
-
+    authorize @project_master
     respond_to do |format|
       if @project_master.save
         ProjectMasterMailer.with(project_master: @project_master).new_project_master_email.deliver_later
@@ -51,7 +56,7 @@ class ProjectMastersController < ApplicationController
     # @project_master =  ProjectMaster.with_deleted.find(params[:id])
       if @project.deleted_at.nil?
         respond_to do |format|
-
+          authorize @project_master
           if @project_master.update(project_master_params)
             format.html { redirect_to project_master_url(@project_master), notice: "Project  was successfully updated." }
             format.json { render :show, status: :ok, location: @project_master }

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_project_master
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy,:update_status]
   @users=User.all
 
   # GET project_masters/1/tasks
@@ -33,7 +33,15 @@ class TasksController < ApplicationController
       render action: 'new'
     end
   end
-
+  
+  def update_status
+    if params[:status].present? && Task::STATUS_OPTIONS.collect {|ind| ind[1]}.include?(params[:status])
+      @task.update(status: params[:status])
+      redirect_to home_path, notice: 'status changed!'
+    else
+      redirect_to home_path, alert: 'stop hacking!'
+    end
+  end
   # PUT project_masters/1/tasks/1
   def update
     if @task.deleted_at.nil?
