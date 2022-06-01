@@ -3,6 +3,10 @@ class ClientsController < ApplicationController
         @client = Client.new
 
     end
+    def index
+        @activities = PublicActivity::Activity.all 
+    end
+
     def create
         @client = Client.new(client_params)
         respond_to do |format|

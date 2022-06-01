@@ -34,7 +34,7 @@
           <p class="card-text"><b>Project Description: </b><%= @project_master.description %></p>
           <p class="card-text"><b>Project Type:</b> <%= @project_master.ptype %></p>
           <p class="card-text"><b>Start date: </b><% if !@project_master.start_date.nil? %> <%=@project_master.start_date.to_date %><%end%></p>     
-          <p class="card-text"><b>End date: </b><% if @project_master.end_date.nil? and @project_master.phase=="Completed"%> <%=@project_master.start_date.to_date %><%end%></p>     
+          <p class="card-text"><b>End date: </b> <%=@project_master.end_date%></p>     
           <p class="card-text"><b>Technology:</b> <%= @project_master.technology[1,@project_master.technology.length].join(",") %></p>
           <p class="card-text"> <b> Status:</b><small class="badge <%=bgcolor%> text-white"> <%= @project_master.phase %> </small> </p>
 

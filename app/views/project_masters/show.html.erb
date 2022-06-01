@@ -2,10 +2,10 @@
 <%= render 'project_master_show' %>
 
 <div>  
-
+  <%= pie_chart @project_master.tasks.group(:status).count %>
   <%= link_to "Edit this project ", edit_project_master_path(@project_master) ,class: "btn btn-outline-dark btn-sm" %> |
   <%= link_to "Back to project ", project_masters_path ,class: "btn btn-outline-success btn-sm" %> 
-
+  
 </div>
 <%# <div class="row">
   <%= render "shared/show_member" %>
