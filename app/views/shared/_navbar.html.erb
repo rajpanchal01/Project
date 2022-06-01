@@ -10,32 +10,26 @@
           <li class="nav-item">
              <%= link_to :HOME,home_path ,class: 'link-light nav-link' %>
           </li> 
-          <% if current_user.has_role? :admin %>
+          <% if current_user.has_any_role? :admin, :manager %>
 
-           <li class="nav-item dropdown">
-            <a class="nav-link link-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              ADD NEW
-            </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link link-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ADD NEW
+              </a>
 
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to :Project,new_project_master_path ,class: 'dropdown-item' %>
-              <div class="dropdown-divider"></div>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% if current_user.has_role? :admin %>
+                  <%= link_to :Project,new_project_master_path ,class: 'dropdown-item' %>
+                  <div class="dropdown-divider"></div>
+                  <%= link_to :Client,new_client_path ,class: 'dropdown-item' %>
+                <% end %>
+                <%= link_to :Technology,technologies_path ,class: 'dropdown-item' %>
+                </div>
+            </li>
 
-              <%= link_to :Client,new_client_path ,class: 'dropdown-item' %>
-              <%= link_to :Technology,technologies_path ,class: 'dropdown-item' %>
-              </div>
-          </li>
-
-           <li class="nav-item">
-             <%= link_to :PROJECTS,project_masters_path ,class: 'link-light nav-link' %>
-          </li> 
-          <% end %>
-
-          <% if current_user.has_role? :manager %>
-
-          <li class="nav-item">
-             <%= link_to :PROJECTS,project_masters_path ,class: 'link-light nav-link' %>
-          </li> 
+            <li class="nav-item">
+              <%= link_to :PROJECTS,project_masters_path ,class: 'link-light nav-link' %>
+            </li>
           <% end %>
 
           <li class="nav-item">

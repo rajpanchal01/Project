@@ -16,13 +16,15 @@
             <th>Name</th>
             <th>Type</th>
             <th>Remove</th>
+            <th></th>
         </tr>
         <thead>
         <% Technology.all.each do |ele| %>
             <tr>
                 <td><%= ele.tname %></td>
                 <td><%= ele.ttype %></td>
-                <td><%= link_to "Remove", techdestroy_path(ele.id), class: "btn btn-sm btn-secondary"%></td>
+                <td><%= link_to "Remove", techdestroy_path(ele.id), class: "btn btn-sm btn-secondary" %></td>
+                <td><%= link_to "#{ele.users.count} Developers", root_path, class: "link-primary text-decoration-none" %></td>
             </tr>
         <% end %>
     </table>
