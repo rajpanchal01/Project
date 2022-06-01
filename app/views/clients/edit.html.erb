@@ -30,4 +30,5 @@
 <% else %>
     <p>Currently no project in database!</p>
 <% end %>
+<%= pie_chart @project.group(:phase).count %>
 <%= link_to "Back to Dashboard ", home_path ,class: "btn btn-outline-success btn-sm" %> 

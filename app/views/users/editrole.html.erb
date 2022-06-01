@@ -44,6 +44,7 @@
             </tr>
         <% end %>
     </table>
+    <%= pie_chart @project.group(:phase).count %>
 <% else %>
     <p>No Project assigned!</p>
 <% end %>
@@ -84,6 +85,7 @@
               </tr>
           <% end %>
       </table>
+      <%= pie_chart @task.group(:status).count %>
   <% else %>
       <p>No task assigned!</p>
   <% end %>
