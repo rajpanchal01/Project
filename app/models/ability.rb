@@ -7,9 +7,6 @@ class Ability
     return unless user.present?
     if (user.has_role?:admin) || (user.has_role?:manager) 
       can :manage, Member
-    end
-
-    if (user.has_role?:admin) 
       can :manage, Technology
     end
     # Define abilities for the passed in user here. For example:

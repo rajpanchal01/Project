@@ -9,7 +9,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   after_create :assign_default_role
   has_many :project_masters 
-  has_many :tasks 
+  has_many :tasks
+  has_and_belongs_to_many :technologies
   validate :must_have_a_role, on: :update
 
   private
